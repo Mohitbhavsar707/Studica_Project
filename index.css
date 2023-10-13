@@ -1,0 +1,2523 @@
+/*===== GOOGLE FONTS =====*/
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+
+/*===== VARIABLES CSS =====*/
+:root {
+  --header-height: 3rem;
+  --nav-width: 200px;
+  --nav-widthTwo: 180px;
+
+  /*===== Colors =====*/
+  --background-color: #EEEEEE;
+  --background-loadingScreen-color: aliceblue;
+  --loadingScreenText-color: #333;
+
+
+  /*===== New Default Light Theme =====*/
+  --light-white-background: #F7F6FB;
+  --default-text-color: #111;
+  --default-icon-color-blue: #2550A5;
+  --first-color-background: #163972;
+  --first-color-background-two: #163972;
+
+
+
+
+
+  /*===== Light Theme =====*/
+  --first-color: #163972;
+  --first-color-light: #163972;
+  --second-color-blue: #2550A5;
+  --third-color-blue: #3FB1E7;
+  --white-color: #F7F6FB;
+  --button-hover-colour: #DE980F;
+  --light-grey: #D9D9D9;
+  --orange-color: #DE980F;
+  --light-orange-color: #feca62;
+  --grey-color: #505257;
+  --dark-mode-background-color: rgba(0, 0, 0, 0.5);
+
+
+  /*===== Font and typography =====*/
+  --body-font: 'Nunito', sans-serif;
+  --normal-font-size: 12px;
+  --header-font: 'Inter', sans-serif;
+  --medium-font-size: 16px;
+  --large-font-size: 24px;
+
+  --font-weight-lightBold: 600;
+  --font-weight-extraBold: 800;
+
+  /*===== z index =====*/
+  --z-fixed: 100;
+}
+
+
+/*===== BASE =====*/
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+/* Dark Mode Styling Applied Here */
+/* Hover over the variable and find its reference point if you would like to change the colour */
+[data-theme="dark"] {
+  --background-color: #0C2142;
+  --light-white-background: #1A1C2F;
+  --button-hover-colour: #3FB1E7;
+  --default-text-color: #F7F6FB;
+  --first-color: #1A1C2F;
+  --grey-color: #8f9094;
+  --dark-mode-background-color: rgba(12, 33, 66, 0.95);
+  --default-icon-color-blue: #F7F6FB;
+  --first-color-background: #0C2142;
+  --first-color-background-two: #F7F6FB;
+
+  --first-color-light: #3FB1E7;
+}
+
+/* Dark Mode Styling */
+/*Simple css to style it like a toggle switch*/
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: inherit;
+  margin-right: 20px;
+}
+
+.theme-switch {
+  display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+}
+
+.slider-icon {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input:checked+.slider {
+  background-color: #66bb6a;
+}
+
+input:checked+.slider .slider-icon {
+  transform: translateX(26px);
+}
+
+input:checked+.slider .slider-icon box-icon[name='sun'] {
+  opacity: 0;
+}
+
+input:checked+.slider .slider-icon box-icon[name='moon'] {
+  opacity: 1;
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round .slider-icon {
+  border-radius: 50%;
+}
+
+
+
+body {
+  position: relative;
+  margin: var(--header-height) 0 0 0;
+  padding: 0 1rem;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  transition: .5s;
+  background-color: var(--background-color);
+  overflow: hidden;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+#tab1,
+#tab2,
+#tab3,
+#tab4,
+#tab5,
+#tab7 {
+  margin: calc(var(--header-height) + 1rem) 0 0 0;
+  padding-left: calc(var(--nav-width) + 1rem);
+}
+
+.strokeme {
+  color: white;
+  background-color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+
+/*==== LOADING SCREEN STYLING =====*/
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-loadingScreen-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  flex-direction: column;
+}
+
+.loading-image {
+  max-width: 50%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 100px;
+}
+
+.loading-message {
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--loadingScreenText-color);
+  font-family: var(--header-font);
+}
+
+.loading {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading .loading-box-container {
+  padding: 2px;
+  width: 40%;
+  border: 2px solid black;
+  border-radius: 20px;
+}
+
+.loading .loading-box-container .loading-bar {
+  height: 20px;
+  border-radius: 20px;
+  background: var(--second-color-blue);
+  animation: Loading 2s forwards cubic-bezier(0, 0, 0, 0);
+}
+
+@keyframes Loading {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+/* END OF LOADING PAGE STYLING */
+
+
+
+/*==== SIDE NAVBAR STYLING  =====*/
+
+.l-navbar {
+  position: fixed;
+  top: 0;
+  left: -30%;
+  width: var(--nav-width);
+  height: 100vh;
+  background-color: var(--first-color);
+  padding: .5rem 1rem 0 0;
+  transition: .5s;
+  z-index: var(--z-fixed);
+}
+
+.nav {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.nav__logo,
+.tablinks {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  align-items: center;
+  column-gap: 1rem;
+  padding: .5rem 0 .5rem 1.5rem;
+}
+
+
+.nav__logo {
+  margin-bottom: 2rem;
+}
+
+.nav_logo-studica {
+  max-width: 8%;
+  display: flex;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav__logo.active .nav_logo-studica {
+  width: 50px;
+  height: 50px;
+}
+
+.nav__name {
+  z-index: 999;
+}
+
+.tablinks {
+  position: relative;
+  color: var(--white-color);
+  margin-bottom: 1.5rem;
+  transition: .3s;
+  font-size: var(--normal-font-size);
+}
+
+.nav__icon {
+  font-size: 1.25rem;
+  z-index: 999;
+}
+
+.show {
+  left: 0;
+}
+
+.body-pd {
+  padding-left: calc(var(--nav-width) + 1rem);
+}
+
+.active {
+  color: black;
+}
+
+.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  margin-left: 10px;
+  height: 32px;
+  background-color: var(--white-color);
+}
+
+/* ===== MEDIA QUERIES FOR NAVBAR=====*/
+@media screen and (min-width: 768px) {
+
+  .header {
+    padding: 0 2rem 0 calc(var(--nav-width) + 2rem);
+  }
+
+  .header__img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .header__img img {
+    width: 45px;
+  }
+
+  .l-navbar {
+    left: 0;
+    padding: 1rem 1rem 0 0;
+  }
+
+  .show {
+    width: calc(var(--nav-width) + 156px);
+  }
+
+  .body-pd {
+    padding-left: calc(var(--nav-width) + 188px);
+  }
+}
+
+
+/*===== STUDICA DEVICE BOARD GENERAL INFORMATION STYLING =====*/
+
+.deviceInfo {
+  display: inline-block;
+  margin-left: 10%;
+  color: var(--white-color);
+  border: var(--white-color) 1px solid;
+  padding: 10px;
+}
+
+.infoSection {
+  display: inline-block;
+  margin: 0;
+  font-size: var(--normal-font-size);
+}
+
+.firmwareVersionValue,
+.boardVersionValue,
+.boardIdValue,
+.boardTypeValue {
+  margin: 0;
+  font-size: calc(var(--normal-font-size) + 1px);
+}
+
+
+
+
+/*===== MAIN CONTENT - TAB 1 - LANDING PAGE STYLING =====*/
+
+.homepageHeader {
+  padding: 50px 0px 50px 0px;
+  margin: 0;
+  font-weight: bolder;
+  font-family: var(--header-font);
+  color: var(--default-text-color);
+}
+
+.devicesConnectedSection {
+  margin: 10px, 0, 0, 10px;
+}
+
+.devicesConnectedLabel {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: var(--first-color);
+  padding: 10px;
+  width: 200px;
+  color: var(--white-color);
+}
+
+.scanDeviceBtn {
+  background-color: var(--second-color-blue);
+  color: var(--white-color);
+  border: none;
+  padding: 10px 10px;
+  cursor: pointer;
+  font-family: var(--header-font);
+}
+
+.scanDeviceBtn:hover {
+  background-color: var(--button-hover-colour);
+  transition: ease-in 0.2s;
+}
+
+.devicesButtons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 2%;
+}
+
+.devicesButtons button:hover {
+  background-color: var(--button-hover-colour);
+  transition: ease-in 0.2s;
+}
+
+.deviceName {
+  font-size: var(--medium-font-size);
+  font-weight: var(--font-weight-lightBold);
+  color: var(--white-color);
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+/* Adding Device - 2: Adding styling to new device button */
+
+.VMXImage,
+.NavX2MicroImage,
+.NavX2MXPImage {
+  display: flex;
+  border: none;
+  color: var(--white-color);
+  font-family: var(--header-font);
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 10px;
+  border-radius: 5px;
+  padding: 100px;
+  background-color: var(--first-color);
+  cursor: pointer;
+}
+
+/* ------------------------------------------------------ */
+
+/* Media queries for device buttons container */
+@media screen and (max-width: 768px) {
+
+  .devicesButtons {
+    flex-wrap: wrap;
+    margin: 50px 10px 0 10px;
+  }
+
+  .devicesButtons button {
+    flex-basis: calc(50% - 10px);
+    padding: 100px;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+
+  .devicesButtons button {
+    flex-basis: calc(100% - 10px);
+    padding: 100px;
+  }
+}
+
+/* End of MAIN CONTENT - TAB 1 - LANDING PAGE STYLING  */
+
+
+
+/*===== DFU MODE POPUP STYLING =====*/
+
+#autoDfuSelectionContainer {
+  position: fixed;
+  bottom: -100%;
+  width: 100%;
+  height: 100%;
+  transition: bottom 0.5s ease-in-out;
+  z-index: var(--z-fixed);
+  /* Change this value to 99 if the dfu popup doesnt work */
+}
+
+#autoDfuSelectionPopup {
+  position: absolute;
+  left: 10%;
+  background-color: var(--light-white-background);
+  width: 50%;
+  height: fit-content;
+  border: solid 3px var(--second-color-blue);
+  border-style: inset;
+  border-radius: 10px;
+  top: 30%;
+  padding-bottom: 2%;
+}
+
+#autoDfuSelectionContainer.visible {
+  bottom: 0;
+}
+
+#closeDeviceSelectContainerBtn {
+  margin-right: 20px;
+  border: none;
+  background: none;
+  color: red;
+  cursor: pointer;
+}
+
+#closeDeviceSelectContainerBtn:hover {
+  background-color: red;
+  color: var(--white-color);
+  transition: transform 0.5s ease;
+}
+
+.selectFileHeader {
+  font-family: var(--header-font);
+  font-weight: var(--font-weight-lightBold);
+}
+
+.horizontalLine {
+  margin-right: 20%;
+}
+
+
+.selectDownloadsMain {
+  font-family: var(--body-font);
+  font-size: 15px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 30%;
+}
+
+
+/*==== MAIN CONTENT - TAB 2 - NAVX UI APP STYLING =====*/
+
+.uiPageHeader,
+.uiPageSubHeader {
+  font-family: var(--header-font);
+  text-transform: uppercase;
+}
+
+.uiPageHeader {
+  color: var(--first-color-background-two);
+  font-weight: var(--font-weight-extraBold);
+}
+
+.uiPageSubHeader {
+  color: var(--third-color-blue);
+}
+
+.uiContent {
+  display: flex;
+  flex-direction: row;
+  margin: 2% 0 0 2%;
+}
+
+.uiLeft {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  width: 20%;
+}
+
+.uiButtonContainer {
+  display: flex;
+  flex-direction: column;
+  height: 10vh;
+  justify-content: space-around;
+}
+
+#start-button,
+#stop-button,
+#currentValues-button,
+#reset-button {
+  padding: 10px;
+  background-color: var(--second-color-blue);
+  color: var(--white-color);
+  border: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+#start-button:hover,
+#stop-button:hover,
+#currentValues-button:hover,
+#reset-button:hover {
+  background-color: var(--button-hover-colour);
+  transition: ease-in 0.2s;
+}
+
+.accelContentContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: var(--default-text-color);
+}
+
+.accelValuesContainer {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.accelXContainer,
+.accelYContainer,
+.accelZContainer {
+  padding: 5%;
+  margin: 10px;
+  background-color: var(--light-white-background);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 30%);
+  border-radius: 5%;
+  min-width: 65px;
+  max-width: 65px;
+  /* max-width: 100px; */
+  border: solid 3px var(--orange-color);
+  border-style: inset;
+
+}
+
+.extraValuesContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  color: var(--default-text-color);
+  padding: 10% 0;
+
+}
+
+.gyroRangeContainer,
+.accelRangeContainer {
+  padding: 15%;
+  margin: 10px;
+  background-color: var(--light-white-background);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 30%);
+  border-radius: 5%;
+  width: 100%;
+  border: solid 3px var(--second-color-blue);
+  border-style: inset;
+}
+
+.uiValueTexts {
+  font-size: larger;
+}
+
+.uiMiddle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60%;
+}
+
+/* Three JS Object Container Styling */
+#image-container {
+  width: 600px;
+  height: 600px;
+  margin: auto;
+  position: relative;
+  outline: none;
+  border: none;
+  transition: transform 0.5s ease;
+}
+
+.uiRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20%;
+}
+
+.uiValuesContainer {
+  margin-top: -80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  color: var(--white-color);
+  margin-right: 10px;
+}
+
+.uiValueTexts {
+  font-size: larger;
+}
+
+
+.extraValuesTwoContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: var(--default-text-color);
+  text-align: center;
+}
+
+.headingContainer,
+.temperatureContainer {
+  padding: 10px;
+  margin: 5px;
+  background-color: var(--light-white-background);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 30%);
+  border: solid 3px var(--second-color-blue);
+  border-style: inset;
+}
+
+
+.liveYawContainer,
+.livePitchContainer,
+.liveRollContainer {
+  padding: 5%;
+  margin: 10px;
+  background-color: var(--second-color-blue);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 30%);
+  border-radius: 5%;
+  width: 200px;
+}
+
+/* End of Main Content - Tab 2 - NavXUI App Styling */
+
+
+
+/*==== MAIN CONTENT - TAB 3 - FIRMWARE UPDATER STYLING =====*/
+
+
+/* Firmware Card (Left Side) in Firmware Updater Styling */
+
+.firmwareContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 200px;
+}
+
+.firmwareUpdaterCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: var(--light-white-background);
+  color: var(--default-text-color);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 30%);
+  border-radius: 5px;
+  width: 60%;
+  height: 90vh;
+  margin-right: 10px;
+  padding: 20px 20px 50px 20px;
+}
+
+.firmwareHeader {
+  font-family: var(--header-font);
+  text-align: left;
+  width: fit-content;
+}
+
+.firmwareInfoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-family: var(--body-font);
+}
+
+.firmwareInfoContainer>div {
+  display: inline-flexbox;
+  margin-top: 3%;
+  margin-left: 4%;
+  margin-right: 4%;
+}
+
+.firmwareUpdaterInfo {
+  display: flex;
+  align-items: center;
+}
+
+.versionValue,
+.modelValue,
+.manufacturerValue {
+  margin-left: 5px;
+  font-size: var(--medium-font-size);
+}
+
+.informationText {
+  font-size: 14px;
+}
+
+
+.magInstructionalVideo{
+  display: flex;
+  width: 100%;
+}
+
+
+.processSubHeader {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+@media only screen and (max-width: 700px) {
+  .processSection h2 {
+    font-size: calc(var(--large-font-size) - 4px);
+  }
+
+  .processSubHeader {
+    font-size: var(--normal-font-size);
+  }
+}
+
+.processSteps {
+  display: flex;
+  flex-direction: column;
+}
+
+.processSteps>div {
+  margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .processSteps {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    font-size: 15px;
+    height: fit-content;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+
+  .processSteps>div {
+    margin-bottom: unset;
+    width: calc(25% - (20px / 4));
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: solid 2px var(--second-color-blue);
+    border-style: inset;
+    text-align: center;
+  }
+}
+
+.firmwareUpdaterBtn {
+  width: 100%;
+  background-color: var(--second-color-blue);
+  color: var(--white-color);
+  padding: 20px;
+  border: none;
+  cursor: pointer;
+  font-family: var(--header-font);
+  margin-bottom: 4%;
+}
+
+.firmwareUpdaterBtn:hover {
+  background-color: var(--button-hover-colour);
+  cursor: pointer;
+  transition: ease-in 0.2s;
+}
+
+
+/* Downloads Card (Right Side) in Firmware Updater Styling */
+
+.downloadsCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: var(--light-white-background);
+  color: var(--default-text-color);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 30%);
+  border-radius: 5px;
+  width: 40%;
+  height: 90vh;
+  padding: 20px;
+}
+
+.downloadsCardContent {
+  margin: 0, 5%, 0, 5%;
+}
+
+.downloadsHeader {
+  font-family: var(--header-font);
+  text-align: left;
+}
+
+.loadFirmwareContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.loadFirmwareBtn,
+.loadManualBtn,
+.downloadsFileBtn,
+.downloadsDeleteBtn {
+  background-color: var(--second-color-blue);
+  color: var(--white-color);
+  border: none;
+  cursor: pointer;
+  font-family: var(--header-font);
+  text-transform: uppercase;
+}
+
+.downloadsFiles {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 250px;
+}
+
+.loadFirmwareBtn {
+  width: 100%;
+  padding: 20px;
+}
+
+.loadManualBtn {
+  width: 50%;
+  padding: 10px;
+  margin-top: 2%;
+}
+
+.loadFirmwareBtn:hover,
+.loadManualBtn:hover,
+.downloadsFileBtn:hover,
+.downloadsDeleteBtn:hover {
+  background-color: var(--button-hover-colour);
+  cursor: pointer;
+  transition: ease-in 0.2s;
+}
+
+.downloadsLabel {
+  margin-top: 4%;
+  font-family: var(--body-font);
+  font-size: var(--medium-font-size);
+  padding: 0, 4%, 0, 4%;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.downloadsLabel:hover {
+  color: var(--white-color);
+  background-color: var(--third-color-blue);
+  border-radius: 4px;
+}
+
+.downloadsFileBtn {
+  position: absolute;
+  bottom: 5%;
+  padding: 0.5%;
+}
+
+.downloadsDeleteBtn {
+  align-self: flex-end;
+  position: absolute;
+  bottom: 5%;
+  padding: 0.5%;
+}
+
+.downloadsSection-hover-color {
+  color: var(--third-color-blue);
+}
+
+.hover-color {
+  color: white;
+  background-color: var(--third-color-blue);
+  width: fit-content;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+/*==== Styling for the Firmware Downloads popup container ====*/
+#selectDownloadsContainer {
+  position: fixed;
+  bottom: -100%;
+  width: 100%;
+  height: 100%;
+  transition: bottom 0.5s ease-in-out;
+  z-index: var(--z-fixed);
+}
+
+#selectContainerPopup {
+  position: absolute;
+  left: 10%;
+  background-color: var(--light-white-background);
+  width: 50%;
+  height: fit-content;
+  border: solid 2px var(--second-color-blue);
+  border-radius: 10px;
+  top: 25%;
+}
+
+.selectDownloadsButton {
+  background-color: var(--second-color-blue);
+  color: white;
+  padding: 10px;
+  margin-top: 5%;
+  width: 20%;
+  cursor: pointer;
+  margin-bottom: 5%;
+}
+
+.selectDownloadsButton:hover {
+  background-color: var(--button-hover-colour);
+  transition: ease-in 0.2s;
+}
+
+.selectContainerContent {
+  margin: 2% 0 0 5%;
+}
+
+.selectContainerTotal {
+  display: flex;
+  flex-direction: column;
+  color: var(--default-text-color);
+}
+
+/* Styling to close the visible popup container */
+#selectDownloadsContainer.visible {
+  bottom: 0;
+}
+
+.closeSelectDownloadsContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+#closeSelectContainerBtn {
+  color: red;
+  border: none;
+  background-color: transparent;
+  position: relative;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  margin-right: 5%;
+  font-size: var(--large-font-size);
+}
+
+#closeSelectContainerBtn:hover {
+  background-color: red;
+  color: white;
+  transition: ease-in 0.2s;
+}
+
+/* End of MAIN CONTENT - TAB 3 - FIRMWARE UPDATER PAGE STYLING  */
+
+
+/*==== MAIN CONTENT - TAB 4 - DEVICE CONFIGURATION PAGE STYLING =====*/
+
+.deviceConfigContentAll {
+  margin-left: 2%;
+  color: var(--default-text-color);
+}
+
+.deviceConfigMainheader {
+  font-family: var(--header-font);
+  font-weight: var(--font-weight-lightBold);
+  font-size: var(--large-font-size);
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.motionProcessingConfigSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 0 20px 20px 0px;
+}
+
+.configurationCard {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--light-white-background);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 25rem;
+  font-family: var(--header-font);
+  margin-right: 1%;
+  justify-content: space-around;
+}
+
+#deviceConfigIcons {
+  margin-right: 10px;
+  color: var(--default-icon-color-blue);
+}
+
+.deviceInputBoxStyling {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.configHeaderInfoPopup {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#moreInfoIcon {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#moreInfoIcon .moreInfoIconText {
+  visibility: hidden;
+  width: 120px;
+  background-color: var(--light-grey);
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  font-size: var(--normal-font-size);
+  font-weight: 100;
+  font-family: var(--body-font);
+  /* Position the text */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+#moreInfoIcon:hover .moreInfoIconText {
+  visibility: visible;
+  transition-delay: 0.5s;
+  animation: ease-in 2s;
+}
+
+.setDefaultButtons {
+  width: 100%;
+}
+
+.setDefaultButtons button {
+  background-color: var(--third-color-blue);
+  border: none;
+  color: var(--white-color);
+  padding: 8px;
+  font-size: small;
+  font-weight: 600px;
+}
+
+.setDefaultButtons button:hover {
+  background-color: var(--orange-color);
+  cursor: pointer;
+  transition: ease-in 0.2s;
+  font-family: var(--header-font);
+}
+
+.motionProcessingConfigSection img {
+  width: 85px;
+  height: auto;
+  padding-right: 10px;
+}
+
+.inputBox {
+  border: none;
+  background-color: var(--grey-color);
+  color: var(--white-color);
+  padding-left: 10px;
+}
+
+.unitsLabel {
+  margin-left: 10px;
+  color: var(--first-color-background);
+  font-weight: var(--font-weight-lightBold);
+}
+
+/* Buttons to open accel and sensor popup styling */
+.accelSensorSection {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5%;
+}
+
+.accelButton,
+.sensorFusionButton {
+  width: 100%;
+  background-color: var(--second-color-blue);
+  color: var(--white-color);
+  padding: 20px;
+  border: none;
+  cursor: pointer;
+  font-family: var(--header-font);
+}
+
+.accelButton:hover,
+.sensorFusionButton:hover {
+  background-color: var(--button-hover-colour);
+}
+
+.sensorFusionCalibration {
+  margin-left: 30%;
+}
+
+
+
+/*===== ACCELEROMETER POPUP CONTAINER STYLING =====*/
+
+.accel-header-main {
+  color: var(--default-text-color);
+}
+
+#accel-popup-container {
+  position: fixed;
+  bottom: -100%;
+  width: 100%;
+  height: 95%;
+  transition: bottom 0.5s ease-in-out;
+  z-index: var(--z-fixed);
+}
+
+#accel-popup {
+  position: absolute;
+  background-color: var(--light-white-background);
+  width: 100%;
+  height: fit-content;
+}
+
+.accel-content {
+  margin: 2% 0 0 5%;
+}
+
+.acc-cards {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2%;
+}
+
+.stateQCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.accelBtnContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.beginCalibrationBtn,
+.cancelCalibrationBtn {
+  width: 100%;
+  padding: 20px;
+  color: var(--white-color);
+  border: none;
+  cursor: pointer;
+}
+
+.beginCalibrationBtn {
+  background-color: darkgreen;
+}
+
+.beginCalibrationBtn:hover {
+  background-color: rgb(6, 175, 6);
+}
+
+.cancelCalibrationBtn {
+  background-color: darkred;
+  margin-left: 5%;
+}
+
+.cancelCalibrationBtn:hover {
+  background-color: red;
+}
+
+.stateAndQualityCheck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 8%;
+  width: 100%;
+}
+
+.accelState,
+.accelQuality {
+  padding: 40px;
+  color: var(--white-color);
+  background-color: var(--first-color-background);
+  border-radius: 20px;
+}
+
+.accelQuality {
+  margin-top: 5%;
+}
+
+/* Styling for the visible popup container */
+#accel-popup-container.visible {
+  bottom: 0;
+}
+
+.videoSection {
+  color: var(--white-color);
+  background-color: var(--first-color-background);
+  border-radius: 20px;
+  margin-left: 40px;
+  width: 60%;
+}
+
+.vidContentSection {
+  text-align: center;
+  font-family: var(--body-font)
+}
+
+.notDoneIcon,
+.doneIcon {
+  width: 50px;
+  height: 50px;
+  background-color: var(--light-white-background);
+  border-radius: 50px;
+}
+
+.closePopupContainer {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+#close-accel-popup {
+  bottom: 0;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1.0rem;
+  color: var(--white-color);
+  margin-bottom: 5%;
+  background-color: var(--second-color-blue);
+  border: none;
+}
+
+#close-accel-popup:hover {
+  background-color: var(--button-hover-colour);
+  transition: ease-in 0.3s;
+}
+
+/*===== SENSOR FUSION POPUP CONTAINER STYLING =====*/
+
+/* Fusion Container One */
+#fusion-popup-container {
+  position: fixed;
+  bottom: -100%;
+  width: 100%;
+  height: 95%;
+  transition: bottom 0.5s ease-in-out;
+  z-index: 99;
+}
+
+#fusion-popup {
+  position: absolute;
+  background-color: var(--light-white-background);
+  width: 100%;
+  height: -webkit-fill-available;
+}
+
+.fusion-content {
+  margin: 2% 0 0 5%;
+}
+
+.fusionTotal {
+  display: flex;
+  flex-direction: column;
+}
+
+.coeffHeaderContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 70%;
+}
+
+.blue-text {
+  color: var(--third-color-blue);
+  font-weight: var(--font-weight-extraBold);
+}
+
+.fusion-header-main {
+  color: var(--default-text-color);
+  margin-bottom: 5%;
+  text-transform: uppercase;
+
+}
+
+.nextAndPrevButtonContainerOne,
+.nextAndPrevButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 5rem;
+  margin-top: 2rem;
+}
+
+.leftButton,
+.rightButton {
+  background-color: var(--orange-color);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  color: var(--white-color);
+}
+
+.leftButton:hover {
+  background-color: var(--light-orange-color);
+}
+
+.rightButton:hover {
+  background-color: var(--light-orange-color);
+}
+
+
+
+.coeffContent {
+  display: flex;
+  flex-direction: row;
+}
+
+.fusionVideoOne,
+.fusionVideoTwo,
+.fusionVideoThree,
+.fusionVideoFour,
+.fusionVideoFive {
+  /* width: 35%;
+  display: flex;
+  background-color: black; */
+
+  background-color: black;
+  position: relative;
+  width: 50%;
+  overflow: hidden;
+}
+
+.vidFusion {
+  /* background-color: #000;  
+  align-self: center; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+
+.vidFusion {
+
+  /* background-color: #000;  
+
+  align-self: center; */
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  bottom: 0;
+
+  right: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+}
+
+
+
+
+
+.fusionCalculationSectionMain {
+
+  display: flex;
+
+  flex-direction: column;
+  margin-left: 1%;
+  justify-content: space-between;
+
+  width: 450px;
+
+}
+
+
+.startButtonFusionPageOne,
+.stopButtonFusionPageOne {
+  width: 100%;
+  color: var(--white-color);
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: var(--font-weight-lightBold);
+  font-family: var(--header-font);
+}
+
+.startButtonFusionPageOne {
+  background-color: darkgreen;
+  margin-bottom: 10px;
+}
+
+.stopButtonFusionPageOne {
+  background-color: darkred;
+  margin-top: 10px;
+}
+
+.startButtonFusionPageOne:hover {
+  background-color: green;
+}
+
+.stopButtonFusionPageOne:hover {
+  background-color: red;
+}
+
+.yawContainer {
+  background-color: var(--first-color-background);
+  color: var(--white-color);
+  text-align: center;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.yawHeader {
+  font-weight: bold;
+  font-family: var(--header-font);
+}
+
+#compass,
+#compass2,
+#compass3,
+#compass4,
+#compass5 {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  transition: transform 0.2s ease;
+  ;
+  border: none;
+}
+
+.compass-rose {
+  fill: none;
+  stroke: var(--orange-color);
+  stroke-width: 2;
+}
+
+.compass-direction {
+  fill: var(--white-color);
+}
+
+.yawValue {
+  font-size: var(--medium-font-size);
+  font-family: var(--header-font);
+}
+
+.saveValuesContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.saveValuesOneContainer,
+.saveValuesTwoContainer {
+  padding: 10px;
+  background-color: var(--first-color-background);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.saveValuesHeader {
+  color: var(--white-color);
+  font-family: var(--header-font);
+}
+
+.fusion-textOne,
+.fusion-textTwo,
+.fusion-textThree,
+.fusion-textFour {
+  padding: 10px;
+  text-align: center;
+}
+
+.saveValueOneBtn,
+.saveValueTwoBtn {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: transparent;
+  border: solid 1px var(--white-color);
+  color: var(--white-color);
+  font-weight: var(--font-weight-extraBold);
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.saveValueOneBtn:hover,
+.saveValueTwoBtn:hover {
+  background-color: var(--third-color-blue);
+  border: solid 1px var(--white-color);
+  transition: ease-in 0.2s;
+}
+
+#fusion-popup-container.visible {
+  bottom: 0;
+}
+
+#close-fusion-popup,
+#close-finalFusion-popup {
+  bottom: 0;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1.0rem;
+  color: var(--white-color);
+  margin-bottom: 5%;
+  margin-top: 5%;
+  background-color: var(--second-color-blue);
+  border: none;
+}
+
+#close-fusion-popup:hover,
+#close-finalFusion-popup:hover {
+  background-color: var(--button-hover-colour);
+  transition: ease-in 0.3s;
+}
+
+
+/*Fusion Popups Container */
+#fusion-popupTwo-container,
+#fusion-popupThree-container,
+#fusion-popupFour-container,
+#fusion-popupFive-container {
+  position: fixed;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  transition: right 0.5s ease-in-out;
+  z-index: var(--z-fixed);
+  top: 0;
+}
+
+/* Styling for the popup cards */
+#fusion-popupTwo,
+#fusion-popupThree,
+#fusion-popupFour,
+#fusion-popupFive {
+  position: absolute;
+  background-color: var(--light-white-background);
+  width: 100%;
+  height: -webkit-fill-available;
+  margin-left: 12%;
+  margin-top: 2%;
+}
+
+
+#fusion-popupTwo-container.visible,
+#fusion-popupThree-container.visible,
+#fusion-popupFour-container.visible,
+#fusion-popupFive-container.visible {
+  right: 0;
+}
+
+
+/*==== MAIN CONTENT - TAB 5 - MAGNETOMETER CALIBRATION PAGE STYLING =====*/
+
+.mag-header-main {
+  margin-left: 3%;
+  font-family: var(--header-font);
+  font-weight: var(--font-weight-lightBold);
+  font-size: 1.5rem;
+  padding: 0;
+  color: var(--default-text-color);
+}
+
+.deviceCalibrationSettingSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  max-width: 90%;
+}
+
+.magCalLeft {
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+  height: unset;
+  background-color: var(--light-white-background);
+  padding: 2%;
+  border-radius: 10px;
+  color: var(--default-text-color);
+}
+
+.magCalRight {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.saveValueBtnContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.saveValuesBtn,
+.retrieveValuesBtn {
+  width: 49%;
+  padding: 10px;
+  background-color: var(--second-color-blue);
+  color: var(--white-color);
+  border: none;
+  cursor: pointer;
+}
+
+.saveValuesBtn:hover,
+.retrieveValuesBtn:hover {
+  background-color: var(--button-hover-colour);
+  transition: ease-in 0.3s;
+}
+
+.matrixCalculationSection {
+  padding: 10px 30px 10px 30px;
+  color: var(--white-color);
+  background-color: var(--second-color-blue);
+  width: 100%;
+}
+
+
+.transformation-matrix-header {
+  font-family: var(--header-font);
+  font-size: initial;
+}
+
+
+.matrix-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 8fr);
+  justify-content: flex-start;
+  background-color: none;
+  width: 100%;
+}
+
+.matrix-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.matrix-text {
+  font-size: 18px;
+  font-weight: bold;
+  background-color: var(--white-color);
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  padding: 5px;
+  width: 60%;
+}
+
+
+#matrixAndBiasHeader {
+  margin-right: 5%;
+  font-size: larger;
+}
+
+.bias-matrix-header {
+  font-family: var(--header-font);
+  font-size: initial;
+}
+
+.bias-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(3, 8fr);
+  justify-content: flex-start;
+  background-color: none;
+  width: 100%;
+}
+
+
+.bias-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+
+.bias-text {
+  font-size: 18px;
+  font-weight: bold;
+  background-color: var(--white-color);
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  padding: 5px;
+  width: 50%;
+}
+
+
+.calculateMatrixBtnContainer {
+  width: 100%;
+}
+
+
+.calculateMatrixBtn {
+  display: flex;
+  background-color: var(--second-color-blue);
+  color: var(--white-color);
+  width: 70%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin: 2% 0 0 10%;
+  border: none;
+  border: none;
+  cursor: pointer;
+  padding: 20px;
+}
+
+.calculateMatrixBtn:hover {
+  background-color: var(--button-hover-colour);
+  transition: ease-in 0.3s;
+}
+
+/* End of Main content for Mag Page */
+
+
+
+
+/*===== Mag Popup Container Styling =====*/
+
+
+
+
+/* Styling for the Mag popup container */
+#mag-popup-container {
+  position: fixed;
+  bottom: -100%;
+  width: 100%;
+  height: 95%;
+  transition: bottom 0.5s ease-in-out;
+  z-index: 99;
+}
+
+/* Styling for the popup card */
+#mag-popup {
+  position: absolute;
+  background-color: var(--light-white-background);
+  width: 100%;
+  height: fit-content;
+}
+
+
+.mag-content {
+  margin: 2% 0 0 5%;
+}
+
+.magTotal {
+  display: flex;
+  flex-direction: column;
+}
+
+.magContainer {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  justify-content: space-between;
+  color: var(--default-text-color);
+}
+
+.steps {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.step-text {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--default-text-color);
+}
+
+.magVideo {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  width: 80%;
+}
+
+.vidMag {
+  background-color: #000;
+  border-radius: 20px;
+  margin: 5px;
+  object-fit: contain;
+}
+
+
+.step-confi {
+  margin-left: 10px;
+  color: var(--orange-color);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.step-num {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--default-text-color);
+  margin-left: 5px;
+  margin-top: -5px;
+  align-self: flex-start;
+}
+
+.step-te {
+  font-size: 25px;
+  margin-left: 35px;
+  margin-top: -35px;
+  font-weight: bolder;
+}
+
+.steps-te-span {
+  color: var(--orange-color);
+  display: inline-block;
+  margin-right: -0.15em;
+  margin-top: -3px;
+}
+
+.firstSet {
+  margin-top: 2rem;
+}
+
+.firstSetContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+}
+
+
+.pointLabel {
+  color: var(--default-text-color);
+  font-size: larger;
+  font-weight: bolder;
+}
+
+.coordinates {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+
+.coordItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  color: white;
+  margin-right: 5px;
+}
+
+.coordSectionText {
+  color: var(--grey-color);
+  font-weight: 900;
+  position: absolute;
+  margin-top: -2%;
+}
+
+
+.coordText {
+  background-color: #2550A5;
+  padding: 10px;
+  font-size: initial;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 20px;
+  border: none;
+  color: white;
+}
+
+.coordText::placeholder {
+  color: var(--light-grey);
+}
+
+
+.saveAndRecordMagContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+
+.magSaveValuesBtn,
+.recordMagValuesBtn {
+  background-color: var(--grey-color);
+  padding: 10px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.magSaveValuesBtn:hover,
+.recordMagValuesBtn:hover {
+  background-color: var(--button-hover-colour);
+  color: white;
+  transition: ease-in 0.2s;
+}
+
+#secondCalculation,
+#thirdCalculation,
+#fourthCalculation,
+#fifthCalculation,
+#sixthCalculation,
+#seventhCalculation {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#secondCalculation.visible,
+#thirdCalculation.visible,
+#fourthCalculation.visible,
+#fifthCalculation.visible,
+#sixthCalculation.visible,
+#seventhCalculation.visible {
+  opacity: 1;
+}
+
+
+.secondSet {
+  margin-top: 2rem;
+}
+
+
+.secondSetContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+}
+
+/* Styling for the visible popup container */
+#mag-popup-container.visible {
+  bottom: 0;
+}
+
+
+#close-mag-popup {
+  bottom: 0;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1.0rem;
+  color: var(--white-color);
+  margin-bottom: 5%;
+  background-color: var(--second-color-blue);
+  border: none;
+  margin-top: 2%;
+}
+
+#close-mag-popup:hover {
+  background-color: var(--button-hover-colour);
+  transition: ease-in 0.3s;
+}
+
+
+/* Styling for other mag popup containers */
+#mag-popupTwo-container,
+#mag-popupThree-container,
+#mag-popupFour-container,
+#mag-popupFive-container,
+#mag-popupSix-container {
+  position: fixed;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  transition: right 0.5s ease-in-out;
+  z-index: var(--z-fixed);
+  top: -10px;
+  margin: inherit;
+  padding: inherit;
+}
+
+/* Styling for the popup card */
+#mag-popupTwo,
+#mag-popupThree,
+#mag-popupFour,
+#mag-popupFive,
+#mag-popupSix {
+  position: absolute;
+  background-color: var(--light-white-background);
+  width: 100%;
+  height: -webkit-fill-available;
+}
+
+#mag-popupTwo-container.visible,
+#mag-popupThree-container.visible,
+#mag-popupFour-container.visible,
+#mag-popupFive-container.visible,
+#mag-popupSix-container.visible {
+  right: 0;
+}
+
+
+.closeFinalPopupContainer {
+  display: flex;
+  justify-content: flex-start;
+  width: 80%;
+}
+
+
+#calculateSaveBtn {
+  bottom: 0;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1.0rem;
+  color: var(--white-color);
+  margin-bottom: 5%;
+  background-color: var(--second-color-blue);
+  border: none;
+}
+
+#calculateSaveBtn:hover {
+  background-color: var(--button-hover-colour);
+  transition: ease-in 0.3s;
+}
+
+/* End of Mag Page Main Content */
+
+
+
+/*==== MAIN CONTENT - TAB 6 - MAGNETOMETER CALIBRATION PAGE STYLING =====*/
+
+#helpDocumentationPage object {
+  margin-top: 0;
+  padding-left: var(--nav-widthTwo);
+  width: 100%;
+  height: 100vh;
+}
+
+
+
+/*==== MAIN CONTENT - TAB 7 - ABOUT STUDICA PAGE STYLING =====*/
+
+.aboutContent {
+  color: var(--default-text-color);
+  font-size: larger;
+}
+
+.keyboard-shortcuts-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.shortcutsHeader {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.keyboard-shortcut-memo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  color: var(--white-color);
+  width: 100%;
+  text-align: center;
+}
+
+.tour-shortcut,
+.dark-mode-shortcut {
+  padding: 10px;
+  margin: 5px;
+  background-color: var(--grey-color);
+}
+
+
+.copyright-text{
+  text-align: left;
+  bottom: 0;
+  position: fixed;
+
+}
+
+.main{
+  margin-bottom: 50px;
+}
+
+.developer-note-text{
+  text-align: left;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    margin-right: 20px;
+  }
+
+/*==== TOUR FUNCTIONALITY STYLING FOR ENTIRE APP =====*/
+.toggleTourBtn {
+  border: none;
+  background-color: var(--orange-color);
+  color: var(--white-color);
+  border-radius: 5%;
+  text-align: center;
+  padding: 10px;
+  font-weight: var(--font-weight-extraBold);
+  font-family: var(--body-font);
+  transition: ease-in 0.3s;
+  cursor: pointer;
+
+}
+
+.toggleTourBtn:hover {
+  filter: brightness(85%);
+  border: none;
+}
+
+
+
+
+
+/*==== Make tabs visibility hidden at first, and then appear after device clicked =====*/
+
+#deviceDashboard,
+#navuiTab,
+#firmwareTab,
+#deviceTab,
+#magTab,
+#deviceInfo {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#deviceDashboard.visible,
+#navuiTab.visible,
+#firmwareTab.visible,
+#deviceTab.visible,
+#magTab.visible,
+#deviceInfo.visible {
+  display: grid;
+  opacity: 1;
+}
+
+/* Styling for Tour Functionality - Adapted from Sheppard CSS File - In Node Modules */
+
+.shepherd-dark-background {
+  background: var(--dark-mode-background-color)
+}
+
+.shepherd-button {
+  background: #3288e6;
+  border: 0;
+  border-radius: 3px;
+  color: hsla(0, 0%, 100%, 1.50);
+  cursor: pointer;
+  margin-right: .5rem;
+  padding: .5rem 1.5rem;
+  transition: all .5s ease
+}
+
+.shepherd-button:not(:disabled):hover {
+  background: #0962c2;
+  color: hsla(0, 0%, 100%, 1.50);
+}
+
+.shepherd-button.shepherd-button-secondary {
+  background: #f1f2f3;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.75)
+}
+
+.shepherd-button.shepherd-button-secondary:not(:disabled):hover {
+  background: #bbbdbe;
+  color: rgba(0, 0, 0, .75)
+}
+
+.shepherd-button:disabled {
+  cursor: not-allowed
+}
+
+.shepherd-footer {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 .75rem .75rem
+}
+
+.shepherd-footer .shepherd-button:last-child {
+  margin-right: 0
+}
+
+.shepherd-cancel-icon {
+  background: transparent;
+  border: none;
+  color: hsla(0, 0%, 100%, .75);
+  cursor: pointer;
+  font-size: 2em;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  transition: color .5s ease
+}
+
+.shepherd-cancel-icon:hover {
+  color: rgba(199, 0, 0, 0.75)
+}
+
+.shepherd-has-title .shepherd-content .shepherd-cancel-icon {
+  color: hsla(0, 0%, 100%, .75)
+}
+
+.shepherd-has-title .shepherd-content .shepherd-cancel-icon:hover {
+  color: rgba(199, 0, 0, 0.75)
+}
+
+.shepherd-title {
+  display: flex;
+  flex: 1 0 auto;
+  font-size: 1rem;
+  font-weight: 800;
+  margin: 0;
+  color: var(--white-color);
+  padding: 0
+}
+
+.shepherd-header {
+  align-items: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  justify-content: flex-end;
+  line-height: 2em;
+  padding: .75rem .75rem 0
+}
+
+.shepherd-has-title .shepherd-content .shepherd-header {
+  background: var(--first-color);
+  color: white;
+  border: black 2px solid;
+  padding: 1em
+}
+
+.shepherd-text {
+  color: rgba(0, 0, 0, .75);
+  font-size: 1rem;
+  line-height: 1.3em;
+  padding: .75em
+}
+
+.shepherd-text p {
+  margin-top: 0
+}
+
+.shepherd-text p:last-child {
+  margin-bottom: 0
+}
+
+.shepherd-content {
+  border-radius: 5px;
+  outline: none;
+  border: 0.5px solid black;
+  padding: 0
+}
+
+.shepherd-element {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .2);
+  max-width: 400px;
+  opacity: 0;
+  outline: none;
+  transition: opacity .3s, visibility .3s;
+  visibility: hidden;
+  width: 100%;
+  z-index: 9999
+}
+
+.shepherd-enabled.shepherd-element {
+  opacity: 1;
+  visibility: visible
+}
+
+.shepherd-element[data-popper-reference-hidden]:not(.shepherd-centered) {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden
+}
+
+.shepherd-element,
+.shepherd-element *,
+.shepherd-element :after,
+.shepherd-element :before {
+  box-sizing: border-box
+}
+
+
+
+.shepherd-arrow,
+.shepherd-arrow:before {
+  height: 16px;
+  position: absolute;
+  width: 16px;
+   z-index: -1
+}
+
+.shepherd-arrow:before {
+  background: #fff;
+  content: "";    
+  transform: rotate(45deg)
+}
+
+.shepherd-element[data-popper-placement^=top]>.shepherd-arrow {
+  
+  bottom: -8px
+}
+
+.shepherd-element[data-popper-placement^=bottom]>.shepherd-arrow {
+  top: -8px
+}
+
+.shepherd-element[data-popper-placement^=left]>.shepherd-arrow {
+  right: -8px
+}
+
+.shepherd-element[data-popper-placement^=right]>.shepherd-arrow {
+  left: -8px
+}
+
+.shepherd-element.shepherd-centered>.shepherd-arrow {
+  opacity: 0
+}
+
+.shepherd-element.shepherd-has-title[data-popper-placement^=bottom]>.shepherd-arrow:before {
+  /* border: solid 1px black; */
+  background-color: #e6e6e6
+}
+
+.shepherd-target-click-disabled.shepherd-enabled.shepherd-target,
+.shepherd-target-click-disabled.shepherd-enabled.shepherd-target * {
+  pointer-events: none
+}
+
+.shepherd-modal-overlay-container {
+  height: 0;
+  left: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transition: all .3s ease-out, height 0ms .3s, opacity .3s 0ms;
+  width: 100vw;
+  z-index: 9997
+}
+
+.shepherd-modal-overlay-container.shepherd-modal-is-visible {
+  height: 100vh;
+  opacity: .5;
+  transform: translateZ(0);
+  transition: all .3s ease-out, height 0s 0s, opacity .3s 0s
+}
+
+.shepherd-modal-overlay-container.shepherd-modal-is-visible path {
+  pointer-events: all
+}

@@ -1,0 +1,39 @@
+{
+  "name": "studica-app",
+  "version": "1.0.0",
+  "description": "calibration software",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
+  },
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.1.1",
+    "@electron-forge/maker-deb": "^6.0.5",
+    "@electron-forge/maker-rpm": "^6.0.5",
+    "@electron-forge/maker-squirrel": "^6.0.5",
+    "@electron-forge/maker-zip": "^6.0.5",
+    "electron": "^4.0.4"
+  },
+  "dependencies": {
+    "download": "^8.0.0",
+    "electron-cgi": "^0.0.5",
+    "electron-forge": "^5.2.4",
+    "electron-squirrel-startup": "^1.0.0",
+    "mousetrap": "^1.6.5",
+    "shepherd.js": "^11.1.1",
+    "sweetalert2": "^11.7.3",
+    "three": "^0.151.3"
+  }
+}

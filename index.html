@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="./node_modules/shepherd.js/dist/css/shepherd.css">
+  <link rel="stylesheet" href="./img/fontAwesomeKit/css/all.css">
+  <title>Studica Robotics App</title>
+  <link href="index.css" rel="stylesheet" />
+</head>
+
+<body id="body-pd">
+
+  <!-- Loading screen animation -->
+  <div class="loading-screen">
+    <div><img class="loading-image" src="./img/studica-official-logo.png" alt="studica-company-image"></div>
+    <div class="loading-message">Loading...</div>
+    <div class="loading">
+      <div class="loading-box-container">
+        <div class="loading-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    
+  </style>
+  
+
+
+  <!-- Start of Tab Container - All Tabs must remain inside this container for correct functionality -->
+  <div class="tab">
+
+
+    <!-- Side Navbar Functionality -->
+    <div class="l-navbar" id="nav-bar" nav-bar>
+      <nav class="nav">
+        <div>
+          <!-- Main Studica Logo - Also used as a restart button for users/testing purposs -->
+          <a href="" class="nav__logo">
+            <img class="nav_logo-studica" src="./img/studica-official-white.png" alt="Studica Robotics Official Logo">
+          </a>
+
+          <div class="nav__list">
+            <a id="deviceDashboard" href="#" class="tablinks" onclick="openTab(event, 'tab1')">
+              <i class='bx bx-grid-alt nav__icon'></i>
+              <span class="nav__name">Device Dashboard</span>
+            </a>
+
+            <a id="navuiTab" href="#" class="tablinks" onclick="openTab(event, 'tab2')">
+              <i class='bx bx-mobile nav__icon'></i>
+              <span class="nav__name">NavX UI</span>
+            </a>
+
+            <a id="firmwareTab" href="#" class="tablinks" onclick="openTab(event, 'tab3')">
+              <i class='bx bx-wrench nav__icon'></i>
+              <span class="nav__name">Firmware Updater</span>
+            </a>
+
+            <a id="deviceTab" href="#" class="tablinks" onclick="openTab(event, 'tab4')">
+              <i class='bx bx-folder nav__icon'></i>
+              <span class="nav__name">Device Configuration</span>
+            </a>
+
+            <a id="magTab" href="#" class="tablinks" onclick="openTab(event, 'tab5')">
+              <i class='bx bxs-component nav__icon'></i>
+              <span class="nav__name">Mag. Calibration</span>
+            </a>
+
+            <a href="#" class="tablinks" onclick="openTab(event, 'tab6')">
+              <i class='bx bx-cog nav__icon'></i>
+              <span class="nav__name">Help and Support</span>
+            </a>
+
+            <a href="#" class="tablinks" onclick="openTab(event, 'tab7')">
+              <i class='bx bx-info-circle nav__icon'></i>
+              <span class="nav__name">About Studica</span>
+            </a>
+          </div>
+        </div>
+
+
+        <!-- Device Board General Information Container -->
+        <div class="deviceInfo" id="deviceInfo">
+          <h5 class="infoSection">Board Type: </h5>
+          <span class="boardTypeValue" id="boardTypeInfo" boardTypeInfo>0</span>
+          <br>
+          <h5 class="infoSection">Firmware Version: </h5>
+          <span class="firmwareVersionValue" id="firmwareVersionInfo" firmwareVersionInfo>0</span>
+          <br>
+          <h5 class="infoSection">Board Version: </h5>
+          <span class="boardVersionValue" id="boardVersionInfo" boardVersionInfo>0</span>
+          <br>
+          <h5 class="infoSection">Board ID: </h5>
+          <span class="boardIdValue" id="boardIDInfo" boardIDInfo>0</span>
+        </div>
+      
+        <!-- Container to change device, clicking this will refresh the app and set values to default -->
+        <a onclick="" href="#" class="tablinks" id="exit" exit>
+          <i class='bx bx-log-out nav__icon'></i>
+          <span class="nav__name">Change Device</span>
+        </a>
+      </nav>
+    </div> <!-- End of the side navbar container -->
+
+
+    
+
+
+    <!-- MAIN CONTENT - Landing Page Container -->
+    <div id="tab1" class="tabcontent">
+    
+      <h1 class="homepageHeader">WELCOME TO STUDICA'S NAVX DASHBOARD!</h1>
+      <div class="devicesConnectedSection">
+        <div class="devicesConnectedLabel">
+          <i class='bx bx-badge-check nav__icon' style="padding-right:5px;"></i>
+          <span id="numDevicesConnected" numDevicesConnected>0 devices connected</span>
+        </div>
+        <div class="scanDeviceBtnContainer" id="scanDeviceBtnContainer" scanDeviceBtnContainer>
+          <button class="scanDeviceBtn" id="scanDeviceBtn" scanDeviceBtn><i class="fa-solid fa-arrow-right-from-bracket" style="padding-right: 5px;"></i> Scan for Available Devices</button>
+        </div>
+      </div>
+
+      <!-- Adding Device - 1 -->
+      <!-- List of Available Studica Devices Stored here -->
+      <div class="devicesButtons" id="deviceBtns" deviceBtns>
+        <button style="background-image:url(./img/vmx2.png)" class="VMXImage" id="VMXBtn" VMXBtn><span
+            class="deviceName">VMX-pi</span></button>
+        <button style="background-image:url(./img/vmx2.png)" class="VMXImage" id="VMXBtn2" VMXBtn2><span
+            class="deviceName">VMX-pi (2)</span></button>
+        <button style="background-image:url(./img/vmx2.png)" class="VMXImage" id="VMXBtn3" VMXBtn3><span
+            class="deviceName">VMX-pi (3)</span></button>
+
+        <button style="background-image: url(./img/navxmicro.png);" class="NavX2MicroImage" id="navx2_MicroBtn" navx2_MicroBtn><span
+            class="deviceName">NavX2 Micro</span></button>
+        <button style="background-image: url(./img/navxmicro.png);" class="NavX2MicroImage" id="navx2_MicroBtn2"
+        navx2_MicroBtn2><span class="deviceName">NavX2 Micro (2)</span></button>
+        <button style="background-image: url(./img/navxmicro.png);" class="NavX2MicroImage" id="navx2_MicroBtn3"
+        navx2_MicroBtn3><span class="deviceName">NavX2 Micro (3)</span></button>
+
+        <button style="background-image: url(./img/navx2mxp.png);" class="NavX2MXPImage" id="navx2_mxpBtn" navx2_mxpBtn><span
+            class="deviceName">NavX2 MXP</span></button>
+        <button style="background-image: url(./img/navx2mxp.png);" class="NavX2MXPImage" id="navx2_mxpBtn2" navx2_mxpBtn2><span
+            class="deviceName">NavX2 MXP (2)</span></button>
+        <button style="background-image: url(./img/navx2mxp.png);" class="NavX2MXPImage" id="navx2_mxpBtn3" navx2_mxpBtn3><span
+            class="deviceName">NavX2 MXP (3)</span></button>
+
+        <!-- Add new device button here -->
+
+        <!-- <button style="background-image: url();" class="" id="" >
+          <span class="deviceName"></span></button> -->
+
+        <!-- -------------------------- -->
+      </div>
+
+
+      <!-- DFU Mode Checker - To be Shown at the load of the app - Inside Landing Page -->
+      <div id="autoDfuSelectionContainer">
+        <div id="autoDfuSelectionPopup">
+          <div class="selectContainerContent">
+            <div class="selectContainerTotal">
+              <div class="closeSelectDownloadsContainer">
+                <button id="closeDeviceSelectContainerBtn"> <i class="fa fa-close"></i>
+                </button>
+              </div>
+              <div>
+                <h2 class="selectFileHeader">PLEASE SELECT THE DEVICE CONNECTED IN DFU MODE</h2>
+                <hr class="horizontalLine">
+              </div>
+              <div class="selectDownloadsMain" id="DFUDeviceSelect" DFUDeviceSelect>
+                <p class="downloadsLabel" id="VMXDevice" VMXDevice onclick="handleClick(this)"><i class="fa-sharp fa-solid fa-microchip"></i> VMX-pi</p>
+                <p class="downloadsLabel" id="MXPDevice" MXPDevice onclick="handleClick(this)"><i class="fa-sharp fa-solid fa-microchip"></i> MXP</p>
+                <p class="downloadsLabel" id="MicroDevice" MicroDevice onclick="handleClick(this)"><i class="fa-sharp fa-solid fa-microchip"></i> Micro</p>
+                <!-- Adding Device - 8: Add variable for new device -->
+                <p class="downloadsLabel" id="device4" device4 onclick="handleClick(this)"></p>
+                <p class="downloadsLabel" id="device5" device5 onclick="handleClick(this)"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div> <!-- End of Tab 1 Main Content -->
+
+
+    <!-- MAIN CONTENT - NavX Ui App Container -->
+    <div id="tab2" class="tabcontent">
+
+      <!-- Need scripts to use three.js library and render object  -->
+      <script src="./three.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/gsap.min.js"></script>
+
+
+      <div class="UiHeaderContainer">
+        <h1 class="uiPageHeader">Robotics Navigation Sensor</h1>
+        <h2 class="uiPageSubHeader">3d Interactive Visualizer</h2>
+      </div>
+
+
+      <div class="uiContent">
+        <div class="uiLeft">
+          <div class="uiButtonContainer"> <!-- UI Page Start and Stop Button -->
+            <div>
+              <button class="start-button" id="start-button"> <i class="fa-sharp fa-regular fa-circle-play fa-lg"
+                  style="color: #ffffff; margin-right: 5px;"></i> START</button>
+            </div>
+
+            <div>
+              <button id="stop-button"><i class="fa-regular fa-circle-stop fa-lg"
+                  style="color: #ffffff; margin-right: 5px;"></i> STOP</button>
+            </div>
+          </div>
+
+          <div class="accelContentContainer">
+            <div>
+              <h3>Acceleration</h3>
+            </div>
+
+            <div class="accelValuesContainer">
+              <div class="accelXContainer">
+                <h3>X</h3>
+                <p class="accelXValue" id="accelx">0</p>
+              </div>
+  
+              <div class="accelYContainer">
+                <h3>Y</h3>
+                <p class="accelYValue" id="accely">0</p>
+              </div>
+  
+              <div class="accelZContainer">
+                <h3>Z</h3>
+                <p class="accelZValue" id="accelz">0</p>
+              </div>
+            </div>
+          </div>
+          
+
+          <!-- These are static values obtained based on the device -->
+          <div class="extraValuesContainer">
+            <div class="gyroRangeContainer">
+              <h3>Gyro Range</h3>
+              <i class="fa-solid fa-microchip fa-3x" style="color: #DE980F;"></i>
+              <p class="uiValueTexts" id="navgyrorange">0</p>
+            </div>
+            <div class="accelRangeContainer">
+              <h3>Accel Range</h3>
+              <i class="fa-solid fa-gauge-simple fa-3x" style="color: #DE980F;"></i>
+              <p class="uiValueTexts" id="navaccelrange">0</p>
+            </div>
+          </div>
+
+          <!-- Reset the rotation of the device -->
+          <button id="reset-button"><i class="fa-solid fa-retweet fa-lg"
+              style="color: #ffffff; margin-right: 5px;"></i>RESET YAW</button>
+        </div>
+
+
+        <!-- Container to store the 3D Object of the robot -->
+        <div class="uiMiddle">
+          <div id="image-container"></div>
+        </div>
+
+
+        <div class="uiRight">
+
+          <div class="uiValuesContainer">
+            <div class="extraValuesTwoContainer">
+              <div class="headingContainer">
+                <h3>Heading</h3>
+                <i class="fa-regular fa-compass fa-2x"></i>
+                <p id="heading">0</p>
+                <p id="direction">N</p>
+              </div>
+
+              <div class="temperatureContainer">
+                <h3>&nbsp;&nbsp;Temp&nbsp;&nbsp;</h3>
+                <i class="fa-solid fa-temperature-three-quarters fa-2x"></i>
+                <p id="temp">0</p>
+                <p>°C</p>
+              </div>
+            </div>
+
+            <div class="liveYawContainer">
+              <h3>Yaw Value</h3>
+              <i class="fa-solid fa-plane  fa-2x" style="color: #ffffff;"></i>
+              <p class="uiValueTexts" id="liveyawval" liveyawval>0</p>
+            </div>
+
+            <div class="livePitchContainer">
+              <h3> Pitch Value </h3>
+              <i class="fa-solid fa-right-left fa-rotate-90  fa-2x" style="color: #ffffff;"></i>
+              <p class="uiValueTexts" id="livepitchval" livepitchval>0</p>
+            </div>
+
+            <div class="liveRollContainer">
+              <h3> Roll Value </h3>
+              <i class="fa-solid fa-group-arrows-rotate fa-2x" style="color: #ffffff;"></i>
+              <p class="uiValueTexts" id="liverollval" liverollval>0</p>
+            </div>
+          </div>
+        </div> <!-- End of UI Right Container -->
+      </div>
+    </div> <!-- End of MAIN CONTENT - UI App Container -->
+
+
+
+    <!-- MAIN CONTENT - Firmware Updater Container -->
+    <div id="tab3" class="tabcontent">
+      <div class="firmwareContainer">
+
+        <div class="firmwareUpdaterCard">
+          <div>
+            <h1 class="firmwareHeader">FIRMWARE UPDATER</h1>
+
+            <!-- Main Information for the firmware Updater -->
+            <div class="firmwareInfoContainer">
+
+              <div class="firmwareUpdaterInfo">
+                <h3>Manufacturer: </h3>
+                <span class="manufacturerValue" id="manufactureText" manufactureText>---</span>
+              </div>
+
+              <div class="firmwareUpdaterInfo">
+                <h3>Model: </h3>
+                <span class="modelValue" id="modelText" modelText>---</span>
+              </div>
+
+              <div class="firmwareUpdaterInfo">
+                <h3>Version: </h3>
+                <span class="versionValue" id="versionText" versionText>---</span>
+              </div>
+
+              <!-- Instructional Details Container -->
+              <div class="processSection">
+                <h2 style="font-family: var(--header-font);">PROCESS</h2>
+                <div class="processSubHeader">To update [device] firmware, the device must be in Device Firmware Update
+                  (DFU) Mode
+                </div>
+              </div>
+
+              <!-- Steps outlining the process to update the device -->
+              <div class="processSteps">
+                <div class="stepOne">
+                  <h3>Step 1: </h3>
+                  <p>Disconnect the navX-Model device from the PC USB port.</p>
+                </div>
+
+                <div class="stepTwo">
+                  <h3>Step 2: </h3>
+                  <p>Ensure the device has completely powered down (the RED “3.3V LED must be off).</p>
+                </div>
+
+                <div class="stepThree">
+                  <h3>Step 3: </h3>
+                  <p>While holding down the ‘CAL’ button, re-connect the board to the PC USB port.</p>
+                </div>
+
+                <div class="stepFour">
+                  <h3>Step 4: </h3>
+                  <p>After the board has powered up, release the ‘CAL’ button. Reconnect board to PC.</p>
+                </div>
+              </div>
+
+              <!-- Update firmware Button -->
+              <div class="firmwareUpdaterBtnContainer" id="firmwareUpdateDiv" firmwareUpdateDiv>
+                <button class="firmwareUpdaterBtn" id="firmwareUpdateBtn" firmwareUpdateBtn>INSTALL FIRMWARE</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="downloadsCard">
+          <div class="downloadsCardContent">
+            <h1 class="downloadsHeader">AVAILABLE DOWNLOADS</h1>
+
+            <div class="loadFirmwareContainer" id="loadFirmwareDiv" loadFirmwareDiv>
+              <button class="loadFirmwareBtn" id="loadFirmwareBtn" loadFirmwareBtn>LOAD available downloads</button>
+              <button class="loadManualBtn" id="loadManualFilesBtn" loadManualFilesBtn>Load Manually Saved
+                Files</button>
+              <h2>DOWNLOADS:</h2>
+              <!-- Adding Downloads - 1: -->
+              <div class="downloadsFiles">
+              <p class="downloadsLabel" id="download1" download1 onclick="handleClick(this)"></p>
+              <p class="downloadsLabel" id="download2" download2 onclick="handleClick(this)"></p>
+              <p class="downloadsLabel" id="download3" download3 onclick="handleClick(this)"></p>
+              <p class="downloadsLabel" id="download4" download4 onclick="handleClick(this)"></p>
+              <p class="downloadsLabel" id="download5" download5 onclick="handleClick(this)"></p>
+              <p class="downloadsLabel" id="download6" download6 onclick="handleClick(this)"></p>
+              <p class="downloadsLabel" id="download7" download7 onclick="handleClick(this)"></p>
+              <p class="downloadsLabel" id="download8" download8 onclick="handleClick(this)"></p>
+              <p class="downloadsLabel" id="download9" download9 onclick="handleClick(this)"></p>
+              <p class="downloadsLabel" id="download10" download10 onclick="handleClick(this)"></p>
+              <p class="downloadsLabel" id="download11" download11 onclick="handleClick(this)"></p>
+              <p class="downloadsLabel" id="download12" download12 onclick="handleClick(this)"></p>
+              <p class="downloadsLabel" id="download13" download13 onclick="handleClick(this)"></p>
+              <p class="downloadsLabel" id="download14" download14 onclick="handleClick(this)"></p>
+
+                <!-- Template -->
+                <!-- <p class="downloadsLabel" id="download[#]" download[#] onclick="handleClick(this)"></p> -->
+                <!--  -->
+
+            </div>
+              <!-- Javascript to handle the blue hover colour effect and the lasting background colour for file -->
+              <script>
+                var previousSelection = null;
+                function handleClick(element) {
+                  if (previousSelection !== null) {
+                    previousSelection.classList.remove('hover-color');
+                  }
+                  element.classList.add('hover-color');
+                  previousSelection = element;
+                }
+              </script>
+              <button class="downloadsFileBtn" id="openFileExplorer" openFileExplorer>Open Folder</button>
+              <button class="downloadsDeleteBtn" id="deleteFileBtn" deleteFileBtn>Delete</button>
+            </div>
+          </div>
+
+          <!-- Javascript to handle the blue hover colour effect and the lasting background colour for file inside the popup window -->
+          <script>
+            window.addEventListener('DOMContentLoaded', function () {
+              var previousSelection = null;
+              var downloads = document.querySelectorAll('.downloadsSection p');
+              for (var i = 0; i < downloads.length; i++) {
+                downloads[i].addEventListener('click', function () {
+                  if (previousSelection !== null) {
+                    previousSelection.classList.remove('downloadsSection-hover-color');
+                  }
+                  this.classList.add('downloadsSection-hover-color');
+                  previousSelection = this;
+                });
+              }
+            });
+          </script>
+        </div>
+      </div>
+
+
+      <!-- Popup window to select further downloads or retrieve an older firmware version -->
+      <div id="selectDownloadsContainer">
+        <div id="selectContainerPopup">
+          <div class="selectContainerContent">
+            <div class="selectContainerTotal">
+              <div class="closeSelectDownloadsContainer">
+                <button id="closeSelectContainerBtn"> <i class="fa fa-close"></i> </button>
+              </div>
+              <div>
+                <h2 class="selectFileHeader">PLEASE SELECT THE FILE YOU WOULD LIKE TO DOWNLOAD</h2>
+                <hr class="horizontalLine">
+              </div>
+
+              <!-- Adding Downloads - 2: -->
+
+              <div class="selectDownloadsMain" id="selectDownloadsMain" selectDownloadsMain>
+                <p class="downloadsLabel" id="newdownload1" newdownload1 onclick="handleClick(this)"><i class="fa-solid fa-file"></i></p>
+                <p class="downloadsLabel" id="newdownload2" newdownload2 onclick="handleClick(this)"></p>
+                <p class="downloadsLabel" id="newdownload3" newdownload3 onclick="handleClick(this)"></p>
+                <p class="downloadsLabel" id="newdownload4" newdownload4 onclick="handleClick(this)"></p>
+                <p class="downloadsLabel" id="newdownload5" newdownload5 onclick="handleClick(this)"></p>
+                <p class="downloadsLabel" id="newdownload6" newdownload6 onclick="handleClick(this)"></p>
+                <p class="downloadsLabel" id="newdownload7" newdownload7 onclick="handleClick(this)"></p>
+                <p class="downloadsLabel" id="newdownload8" newdownload8 onclick="handleClick(this)"></p>
+                <p class="downloadsLabel" id="newdownload9" newdownload9 onclick="handleClick(this)"></p>
+                <p class="downloadsLabel" id="newdownload10" newdownload10 onclick="handleClick(this)"></p>
+                <p class="downloadsLabel" id="newdownload11" newdownload11 onclick="handleClick(this)"></p>
+                <p class="downloadsLabel" id="newdownload12" newdownload12 onclick="handleClick(this)"></p>
+                <p class="downloadsLabel" id="newdownload13" newdownload13 onclick="handleClick(this)"></p>
+                <p class="downloadsLabel" id="newdownload14" newdownload14 onclick="handleClick(this)"></p>
+
+                <!-- Template -->
+                <!-- <p class="downloadsLabel" id="newdownload[#]" newdownload[#] onclick="handleClick(this)"></p> -->
+                <!--  -->
+
+              </div>
+              <div id="downloadUpdatepopup" downloadUpdatepopup>
+                <button class="selectDownloadsButton" id="popupdownloadBtn" popupdownloadBtn>Select Download</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- End of MAIN CONTENT - Firmware Updater Container -->
+
+
+
+
+    <!-- MAIN CONTENT - Device Configuration Container -->
+    <div id="tab4" class="tabcontent">
+      <div class="deviceConfigContentAll">
+        <h1 class="deviceConfigMainheader">Motion Processing</h1>
+        <div class="motionProcessingConfigSection">
+
+          <div class="configurationCard">
+            <i id="deviceConfigIcons" class="fa-solid fa-arrow-up-right-dots fa-5x"></i>
+            <div style="display: flex; flex-direction: column;">
+
+              <div class="configHeaderInfoPopup"> 
+              <div>
+                <h3>Linear Motion</h3>
+              </div>
+              <div class="infoPopup">
+                <i class="fa-solid fa-circle-info" id="moreInfoIcon" style="color: var(--default-icon-color-blue);" >
+                <span class="moreInfoIconText">* Lower Values <br> = <br> Higher Sensitivity</span>
+                </i>
+              </div>
+            </div>
+
+
+              <div class="deviceInputBoxStyling">
+                <input class="inputBox" type="number" onkeydown="return event.keyCode !== 69" name="inputLabel" id="LinearInput" LinearInput>
+                <label class="unitsLabel" for="inputLabel">Deg/Sec</label>
+              </div>
+              <div style="display: flex;" class="setDefaultButtons" id="linearMotionDiv" linearMotionDiv>
+                <button style="flex: 1; margin-right: 10px;" id="linearMotionSetBtn" linearMotionSetBtn>Set</button>
+                <button style="flex: 1;" id="linearMotionResetBtn" linearMotionResetBtn>Reset</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="configurationCard">
+            <i id="deviceConfigIcons" class="fa-solid fa-rotate-right fa-5x"></i>
+            <div style="display: flex; flex-direction: column;">
+
+              <div class="configHeaderInfoPopup"> 
+                <div>
+                  <h3>Rotation</h3>
+                </div>
+                <div class="infoPopup">
+                  <i class="fa-solid fa-circle-info"  id="moreInfoIcon" style="color: var(--default-icon-color-blue);" >
+                    <span class="moreInfoIconText">* Lower Values <br> = <br> Higher Sensitivity</span>
+                  </i>
+                  
+                </div>
+              </div>
+
+
+              <div class="deviceInputBoxStyling">
+                <input class="inputBox" type="number" onkeydown="return event.keyCode !== 69" name="inputLabel" id="RotationInput" RotationInput>
+                <label class="unitsLabel" for="inputLabel">Deg/Sec</label>
+              </div>
+              <div style="display: flex;" class="setDefaultButtons" id="rotationDiv" rotationDiv>
+                <button style="flex: 1; margin-right: 10px;" id="rotationSetBtn" rotationSetBtn>Set</button>
+                <button style="flex: 1;" id="rotationResetBtn" rotationResetBtn>Reset</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="configurationCard">
+            <i id="deviceConfigIcons" class="fa-sharp fa-solid fa-magnet fa-5x"></i>
+            <div style="display: flex; flex-direction: column;">
+
+              <div class="configHeaderInfoPopup"> 
+                <div>
+                  <h3>Magnetic Disturbance</h3>
+                </div>
+                <div class="infoPopup">
+                  <i class="fa-solid fa-circle-info"  id="moreInfoIcon" style="color: var(--default-icon-color-blue);" >
+                    <span class="moreInfoIconText">* Lower Values <br> = <br> Higher Sensitivity</span>
+                  </i>
+                </div>
+              </div>
+
+              <div class="deviceInputBoxStyling">
+                <input class="inputBox" type="number" onkeydown="return event.keyCode !== 69" name="inputLabel" id="MagInput" MagInput>
+                <label class="unitsLabel" for="inputLabel">%</label>
+              </div>
+              <div style="display: flex;" class="setDefaultButtons" id="magDiv" magDiv>
+                <button style="flex: 1; margin-right: 10px;" id="magSetBtn" magSetBtn>Set</button>
+                <button style="flex: 1;" id="magResetBtn" magResetBtn>Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h1 class="deviceConfigMainheader">FULL-SCALE RANGES</h1>
+
+        <div class="motionProcessingConfigSection">
+          <div class="configurationCard">
+            <i id="deviceConfigIcons" class="fa-solid fa-group-arrows-rotate fa-5x"></i>
+            <div style="display: flex; flex-direction: column;">
+
+              <div class="configHeaderInfoPopup"> 
+                <div>
+                  <h3>Gyro Range</h3>
+                </div>
+                <div class="infoPopup">
+                  <i class="fa-solid fa-circle-info"  id="moreInfoIcon" style="color: var(--default-icon-color-blue);" >
+                    <span class="moreInfoIconText">* Lower Values = Higher Resolution <br> (Even multiple of 125)</span>
+                  </i>
+                </div>
+              </div>
+
+              <div class="deviceInputBoxStyling">
+                <input class="inputBox" type="number" onkeydown="return event.keyCode !== 69" name="inputLabel" id="GyroInput" GyroInput>
+                <label class="unitsLabel" for="inputLabel">Deg/Sec</label>
+              </div>
+              <div style="display: flex;" class="setDefaultButtons" id="gyroDiv" gyroDiv>
+                <button style="flex: 1; margin-right: 10px;" id="gyroSetBtn" gyroSetBtn>Set</button>
+                <button style="flex: 1;" id="gyroResetBtn" gyroResetBtn>Reset</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="configurationCard">
+            <i id="deviceConfigIcons" class="fa-solid fa-gauge-high fa-5x"></i>
+            <div style="display: flex; flex-direction: column;">
+
+              <div class="configHeaderInfoPopup"> 
+                <div>
+                  <h3>Acceleration Range</h3>
+                </div>
+                <div class="infoPopup">
+                  <i class="fa-solid fa-circle-info"  id="moreInfoIcon" style="color: var(--default-icon-color-blue);" >
+                    <span class="moreInfoIconText">* Lower Values = Higher Resolution <br> (Even multiple of 2)</span>
+                  </i>
+                </div>
+              </div>
+
+              <div class="deviceInputBoxStyling">
+                <input class="inputBox" type="number" onkeydown="return event.keyCode !== 69" name="inputLabel" id="AccelInput" AccelInput>
+                <label class="unitsLabel" for="inputLabel">G</label>
+              </div>
+              <div style="display: flex;" class="setDefaultButtons" id="accelDiv" accelDiv>
+                <button style="flex: 1; margin-right: 10px;" id="accelSetBtn" accelSetBtn>Set</button>
+                <button style="flex: 1;" id="accelResetBtn" accelResetBtn>Reset</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="configurationCard">
+            <i id="deviceConfigIcons" class="fa-solid fa-magnifying-glass-chart fa-5x"></i>
+            <div style="display: flex; flex-direction: column;">
+
+              <div class="configHeaderInfoPopup"> 
+                <div>
+                  <h3>Max. Gyro Error (.001-10.0)</h3>
+                </div>
+                <div class="infoPopup">
+                  <i class="fa-solid fa-circle-info"  id="moreInfoIcon" style="color: var(--default-icon-color-blue);" >
+                    <span class="moreInfoIconText">* Lower Values <br> = <br> Reduced Impact of Accelerometers on Yaw Angle</span>
+                  </i>
+                </div>
+              </div>
+
+              <div class="deviceInputBoxStyling">
+                <input class="inputBox" type="number" onkeydown="return event.keyCode !== 69" name="inputLabel" id="MaxGyroInput" MaxGyroInput>
+                <label class="unitsLabel" for="inputLabel">Deg/Sec</label>
+              </div>
+              <div style="display: flex;" class="setDefaultButtons" id="maxDiv" maxDiv>
+                <button style="flex: 1; margin-right: 10px;" id="maxSetBtn" maxSetBtn>Set</button>
+                <button style="flex: 1;" id="maxResetBtn" maxResetBtn>Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Opens the popup for the accelerometer and sensor fusion calibration -->
+        <div class="accelSensorSection">
+          <div class="accCalibration" id="accCalibration" accCalibration>
+            <h1 style="text-align: center;">ACCELEROMETER CALIBRATION</h1>
+            <button id="show-accel-popup" show-accel-popup class="accelButton">START CALIBRATION</button>
+          </div>
+          <div class="sensorFusionCalibration">
+            <h1 style="text-align: center;">SENSOR FUSION CALIBRATION</h1>
+            <button id="show-fusion-popup" class="sensorFusionButton">CALIBRATE SENSOR FUSION </button>
+          </div>
+        </div>
+
+      </div> <!-- End of Device Config Main Page Content -->
+
+
+
+      <!-- Popup for the accelerometer calibration process -->
+
+      <div id="accel-popup-container">
+        <div id="accel-popup">
+
+          <div class="accel-content">
+            <h1 class="accel-header-main">ACCELEROMETER CALIBRATION</h1>
+
+            <div class="acc-cards"> <!-- Card Design for the linear motion/rotation/... calibration -->
+              <div>
+                <div class="stateQCard">
+                  <div id="startCal" startCal>
+                    <button id="beginCalibrationBtn" beginCalibrationBtn class="beginCalibrationBtn">BEGIN
+                      CALIBRATION</button>
+                  </div>
+                  <div id="cancelDiv" cancelDiv>
+                    <button id="cancelCalibrationBtn" cancelCalibrationBtn class="cancelCalibrationBtn">CANCEL
+                      CALIBRATION </button>
+                  </div>
+                </div>
+
+                <!-- Progress Change Section for the Accel Quality and Accel State Condition -->
+                <div id="stateAndQualityCheck" class="stateAndQualityCheck">
+                  <div class="accelState">
+                    <h3>Accelerometer Calibration <br> State</h3>
+                    <!-- In progress and done icons provided through javascript -->
+                    <img class="notDoneIcon" id="accelCalState" src="" alt="">
+                    <h4 class="progressStateLabel" id="accelCalStateLabel"></h4>
+                  </div>
+                  <div class="accelQuality">
+                    <h3>Accelerometer Calibration <br> Quality</h3>
+                    <img class="notDoneIcon" id="accelCalQuality" src="" alt="">
+                    <h4 class="progressQualityLabel" id="accelCalQualityLabel"></h4>
+                  </div>
+                </div>
+
+
+              </div>
+
+              <div class="videoSection">
+                <div class="vidContentSection">
+                  <h3>Follow the instructions shown in the video</h3>
+                  <video width="80%" height="auto" controls muted src="./tutorialVideos/AccelCalibrationVideo.mp4"></video>
+                </div>
+              </div>
+
+            </div>
+            <div class="closePopupContainer" id="closePopupContainer" closePopupContainer>
+              <button id="close-accel-popup" close-accel-popup>Exit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sensor Fusion Calibration Section -->
+      <div id="fusion-popup-container">
+        <div id="fusion-popup">
+          <div class="fusion-content">
+            <div class="fusionTotal">
+              <div class="coeffHeaderContainer">
+                <h1 class="fusion-header-main"><span class="blue-text">Step 1:</span> Sensor Fusion Calibration</h1>
+                <div class="nextAndPrevButtonContainerOne">
+                  <!-- <div class="prevBtn"> (Button Not in use so not needed)
+                                  <button id="closeOriginalPopup" class="leftButton"> <i class="fa-solid fa-left-long leftIcon"></i> </button>
+                                </div> -->
+                  <div class="nextBtn" id="nextBtn1" nextBtn1>
+                    <button id="open-fusion-popupTwo" open-fusion-popupTwo class="rightButton"> <i
+                        class="fa-solid fa-right-long rightIcon" id="rightIcon" rightIcon></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="coeffContent">
+                <div class="fusionVideoOne">
+                  <video class="vidFusion" controls muted src="./tutorialVideos/sensor1.mp4"></video>
+                </div>
+                <div class="fusionCalculationSectionMain" id="fusionCalculationSectionMain"
+                  fusionCalculationSectionMain>
+                  <button class="startButtonFusionPageOne" id="startButtonFusionPageOne" startButtonFusionPageOne>START
+                    CALIBRATION</button>
+                  <!-- <button id = "resetYaw" resetYaw>Reset</button> -->
+                  <div class="yawContainer">
+                    <h3 class="yawHeader">Live Yaw Value </h3> <br>
+                    <div>
+                      <svg id="compass" viewBox="-50 -50 100 100" style="height: 125px;">
+                        <circle class="compass-rose" cx="0" cy="0" r="45" />
+                        <line class="compass-rose" x1="0" y1="-45" x2="0" y2="-40" />
+                        <line class="compass-rose" x1="0" y1="45" x2="0" y2="40" />
+                        <line class="compass-rose" x1="-45" y1="0" x2="-40" y2="0" />
+                        <line class="compass-rose" x1="45" y1="0" x2="40" y2="0" />
+                        <polygon class="compass-direction" points="0,-45 -5,-35 5,-35" />
+                      </svg>
+                    </div>
+                    <p class="yawValue" id="yawValue" yawValue>-</p>
+                  </div>
+
+                  <div class="saveValuesContainer">
+                    <div class="saveValuesOneContainer" id="saveValuesOneContainerPlus" saveValuesOneContainerPlus>
+                      <div>
+                        <h3 class="saveValuesHeader">+90</h3>
+                      </div>
+                      <div>
+                        <input class="fusion-textOne" type="number" name="" id="stepone_plus90" stepone_plus90
+                          placeholder="0">
+                      </div>
+
+                      <div>
+                        <button class="saveValueOneBtn" id="savestepone_plus90" savestepone_plus90>Save</button>
+                      </div>
+                    </div>
+
+                    <div class="saveValuesTwoContainer" id="saveValuesOneContainerMinus" saveValuesOneContainerMinus>
+                      <div>
+                        <h3 class="saveValuesHeader">-90</h3>
+                      </div>
+
+                      <div>
+                        <input class="fusion-textOne" type="number" name="" id="stepone_minus90" stepone_minus90
+                          placeholder="0">
+                      </div>
+
+                      <div>
+                        <button class="saveValueTwoBtn" id="savestepone_minus90" savestepone_minus90>Save</button>
+                      </div>
+
+                    </div>
+                  </div>
+                  <button class="stopButtonFusionPageOne" id="stopButtonFusionPageOne" stopButtonFusionPageOne>STOP
+                    CALIBRATION</button>
+                </div>
+              </div>
+
+              <div class="closePopupContainer">
+                <button id="close-fusion-popup">Exit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="fusion-popupTwo-container">
+        <div id="fusion-popupTwo">
+          <div class="fusion-content">
+            <div class="fusionTotal">
+              <div class="coeffHeaderContainer">
+                <h1 class="fusion-header-main"><span class="blue-text">Step 2:</span> Sensor Fusion Calibration</h1>
+                <div class="nextAndPrevButtonContainer">
+                  <div class="prevBtn">
+                    <button id="close-fusion-popupTwo" class="leftButton"> <i
+                        class="fa-solid fa-left-long leftIcon"></i>
+                    </button>
+                  </div>
+                  <div class="nextBtn" id="nextBtn2" nextBtn2>
+                    <button id="open-fusion-popupThree" open-fusion-popupThree class="rightButton"> <i
+                        class="fa-solid fa-right-long rightIcon" id="rightIcon2" rightIcon2></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="coeffContent">
+                <div class="fusionVideoTwo">
+                  <video class="vidFusion" controls autoplay muted src="./tutorialVideos/sensor 2-4.mp4"></video>
+                </div>
+
+
+                <div class="fusionCalculationSectionMain">
+                  <!-- Opacity set to 0 to maintain consistent formatting for all pages -->
+                  <button style="opacity: 0; pointer-events: none;" class="startButtonFusionPageOne"
+                    id="startButtonFusionPageTwo" startButtonFusionPageTwo>START
+                    CALIBRATION</button>
+
+                  <div class="yawContainer">
+                    <h3 class="yawHeader">Live Yaw Value: </h3>
+                    <div>
+                      <svg id="compass2" viewBox="-50 -50 100 100" style="height: 125px;">
+                        <circle class="compass-rose" cx="0" cy="0" r="45" />
+                        <line class="compass-rose" x1="0" y1="-45" x2="0" y2="-40" />
+                        <line class="compass-rose" x1="0" y1="45" x2="0" y2="40" />
+                        <line class="compass-rose" x1="-45" y1="0" x2="-40" y2="0" />
+                        <line class="compass-rose" x1="45" y1="0" x2="40" y2="0" />
+                        <polygon class="compass-direction" points="0,-45 -5,-35 5,-35" />
+                      </svg>
+                    </div>
+                    <span class="yawValue" id="yawValue2" yawValue2>-</span>
+                  </div>
+
+
+                  <div class="saveValuesContainer">
+
+                    <div class="saveValuesOneContainer" id="saveValuesTwoContainerPlus" saveValuesTwoContainerPlus>
+
+                      <div>
+                        <h3 class="saveValuesHeader">+90</h3>
+                      </div>
+
+                      <div>
+                        <input class="fusion-textOne" type="number" name="" id="steptwo_plus90" steptwo_plus90
+                          placeholder="0">
+                      </div>
+
+                      <div>
+                        <button class="saveValueOneBtn" id="savesteptwo_plus90" savesteptwo_plus90>Save</button>
+                      </div>
+                    </div>
+
+
+                    <div class="saveValuesTwoContainer" id="saveValuesTwoContainerMinus" saveValuesTwoContainerMinus>
+                      <div>
+                        <h3 class="saveValuesHeader">-90</h3>
+                      </div>
+                      <input class="fusion-textOne" type="number" name="" id="steptwo_minus90" steptwo_minus90
+                        placeholder="0">
+                      <button class="saveValueTwoBtn" id="savesteptwo_minus90" savesteptwo_minus90>Save</button>
+                    </div>
+                  </div>
+                  <!-- Opacity set to 0 to maintain consistent formatting for all pages -->
+                  <button style="opacity: 0; pointer-events: none;" class="stopButtonFusionPageOne"
+                    id="stopButtonFusionPageTwo" stopButtonFusionPageOne>STOP
+                    CALIBRATION</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="fusion-popupThree-container">
+        <div id="fusion-popupThree">
+          <div class="fusion-content">
+            <div class="fusionTotal">
+              <div class="coeffHeaderContainer">
+                <h1 class="fusion-header-main"><span class="blue-text">Step 3:</span> Sensor Fusion Calibration</h1>
+                <div class="nextAndPrevButtonContainer">
+                  <div class="prevBtn">
+                    <button id="close-fusion-popupThree" class="leftButton"> <i
+                        class="fa-solid fa-left-long leftIcon"></i>
+                    </button>
+                  </div>
+
+                  <div class="nextBtn" id="nextBtn3" nextBtn3>
+                    <button id="open-fusion-popupFour" open-fusion-popupFour class="rightButton"> <i
+                        class="fa-solid fa-right-long rightIcon" id="rightIcon3" rightIcon3></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="coeffContent">
+                <div class="fusionVideoThree">
+                  <video class="vidFusion" controls autoplay muted src="./tutorialVideos/sensor 2-4.mp4"></video>
+                </div>
+
+                <div class="fusionCalculationSectionMain">
+                  <button style="opacity: 0; pointer-events: none;" class="startButtonFusionPageOne"
+                    id="startButtonFusionPageThree" startButtonFusionPageThree>START
+                    CALIBRATION</button>
+                  <div class="yawContainer">
+                    <h3 class="yawHeader">Live Yaw Value: </h3>
+                    <div>
+                      <svg id="compass3" viewBox="-50 -50 100 100" style="height: 125px;">
+                        <circle class="compass-rose" cx="0" cy="0" r="45" />
+                        <line class="compass-rose" x1="0" y1="-45" x2="0" y2="-40" />
+                        <line class="compass-rose" x1="0" y1="45" x2="0" y2="40" />
+                        <line class="compass-rose" x1="-45" y1="0" x2="-40" y2="0" />
+                        <line class="compass-rose" x1="45" y1="0" x2="40" y2="0" />
+                        <polygon class="compass-direction" points="0,-45 -5,-35 5,-35" />
+                      </svg>
+                    </div>
+                    <span class="yawValue" id="yawValue3" yawValue3>-</span>
+                  </div>
+
+                  <div class="saveValuesContainer">
+                    <div class="saveValuesOneContainer" id="saveValuesThreeContainerPlus" saveValuesThreeContainerPlus>
+                      <div>
+                        <h3 class="saveValuesHeader">+90</h3>
+                      </div>
+                      <div>
+                        <input class="fusion-textOne" type="number" name="" id="stepthree_plus90" stepthree_plus90
+                          placeholder="0">
+                      </div>
+                      <div>
+                        <button class="saveValueOneBtn" id="savestepthree_plus90" savestepthree_plus90>Save</button>
+                      </div>
+                    </div>
+
+
+                    <div class="saveValuesTwoContainer" id="saveValuesThreeContainerMinus"
+                      saveValuesThreeContainerMinus>
+                      <div>
+                        <h3 class="saveValuesHeader">-90</h3>
+                      </div>
+                      <div>
+                        <input class="fusion-textOne" type="number" name="" id="stepthree_minus90" stepthree_minus90
+                          placeholder="0">
+                      </div>
+
+                      <div>
+                        <button class="saveValueTwoBtn" id="savestepthree_minus90" savestepthree_minus90>Save</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button style="opacity: 0; pointer-events: none;" class="stopButtonFusionPageOne"
+                    id="stopButtonFusionPageThree" stopButtonFusionPageOne>STOP CALIBRATION</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="fusion-popupFour-container">
+        <div id="fusion-popupFour">
+          <div class="fusion-content">
+            <div class="fusionTotal">
+              <div class="coeffHeaderContainer">
+                <h1 class="fusion-header-main"><span class="blue-text">Step 4:</span> Sensor Fusion Calibration</h1>
+                <div class="nextAndPrevButtonContainer">
+                  <div class="prevBtn">
+                    <button id="close-fusion-popupFour" class="leftButton"> <i
+                        class="fa-solid fa-left-long leftIcon"></i>
+                    </button>
+                  </div>
+                  <div class="nextBtn" id="nextBtn4" nextBtn4>
+                    <button id="open-fusion-popupFive" open-fusion-popupFive class="rightButton"> <i
+                        class="fa-solid fa-right-long rightIcon" id="rightIcon4" rightIcon4></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="coeffContent">
+                <div class="fusionVideoFour">
+                  <video width="100%" height="auto" class="vidFusion" controls autoplay muted src="./tutorialVideos/sensor 2-4.mp4"></video>
+                </div>
+
+                <div class="fusionCalculationSectionMain">
+                  <button style="opacity: 0; pointer-events: none;" class="startButtonFusionPageOne"
+                    id="startButtonFusionPageFour" startButtonFusionPageFour>START CALIBRATION</button>
+                  <div class="yawContainer">
+                    <h3 class="yawHeader">Live Yaw Value: </h3>
+                    <div>
+                      <svg id="compass4" viewBox="-50 -50 100 100" style="height: 125px;">
+                        <circle class="compass-rose" cx="0" cy="0" r="45" />
+                        <line class="compass-rose" x1="0" y1="-45" x2="0" y2="-40" />
+                        <line class="compass-rose" x1="0" y1="45" x2="0" y2="40" />
+                        <line class="compass-rose" x1="-45" y1="0" x2="-40" y2="0" />
+                        <line class="compass-rose" x1="45" y1="0" x2="40" y2="0" />
+                        <polygon class="compass-direction" points="0,-45 -5,-35 5,-35" />
+                      </svg>
+                    </div>
+                    <span class="yawValue" id="yawValue4" yawValue4>-</span>
+                  </div>
+
+                  <div class="saveValuesContainer">
+                    <div class="saveValuesOneContainer" id="saveValuesFourContainerPlus" saveValuesFourContainerPlus>
+                      <div>
+                        <h3 class="saveValuesHeader">+90</h3>
+                      </div>
+                      <div>
+                        <input class="fusion-textOne" type="number" name="" id="stepfour_plus90" stepfour_plus90
+                          placeholder="0">
+                      </div>
+
+                      <div>
+                        <button class="saveValueOneBtn" id="savestepfour_plus90" savestepfour_plus90>Save</button>
+                      </div>
+                    </div>
+
+
+                    <div class="saveValuesTwoContainer" id="saveValuesFourContainerMinus" saveValuesFourContainerMinus>
+                      <div>
+                        <h3 class="saveValuesHeader">-90</h3>
+                      </div>
+                      <div>
+                        <input class="fusion-textOne" type="number" name="" id="stepfour_minus90" stepfour_minus90
+                          placeholder="0">
+                      </div>
+
+                      <div>
+                        <button class="saveValueTwoBtn" id="savestepfour_minus90" savestepfour_minus90>Save</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button style="opacity: 0; pointer-events: none;" class="stopButtonFusionPageOne"
+                    id="stopButtonFusionPageFour" stopButtonFusionPageOne>STOP CALIBRATION</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="fusion-popupFive-container">
+        <div id="fusion-popupFive">
+          <div class="fusion-content">
+            <div class="fusionTotal">
+              <div class="coeffHeaderContainer">
+                <h1 class="fusion-header-main"><span class="blue-text">Step 5:</span> Sensor Fusion Calibration</h1>
+                <div class="nextAndPrevButtonContainer">
+
+                  <div class="prevBtn">
+                    <button id="close-fusion-popupFive" class="leftButton"> <i
+                        class="fa-solid fa-left-long leftIcon"></i>
+                    </button>
+                  </div>
+
+                  <div class="nextBtn">
+                    <button id="open-fusion-popupSix" class="rightButton"> <i
+                        class="fa-solid fa-right-long rightIcon"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="coeffContent">
+                <div class="fusionVideoFive">
+                  <video class="vidFusion" controls autoplay muted src="./tutorialVideos/sensor5.mp4"></video>
+                </div>
+
+                <div class="fusionCalculationSectionMain" id="ratioCalculationSection" ratioCalculationSection>
+                  <button class="startButtonFusionPageOne" id="calculateBtn" calculateBtn>CALCULATE</button>
+                  <div class="yawContainer">
+                    <h3 class="yawHeader">Live Yaw Value: </h3>
+                    <div>
+                      <svg id="compass5" viewBox="-50 -50 100 100" style="height: 125px;">
+                        <circle class="compass-rose" cx="0" cy="0" r="45" />
+                        <line class="compass-rose" x1="0" y1="-45" x2="0" y2="-40" />
+                        <line class="compass-rose" x1="0" y1="45" x2="0" y2="40" />
+                        <line class="compass-rose" x1="-45" y1="0" x2="-40" y2="0" />
+                        <line class="compass-rose" x1="45" y1="0" x2="40" y2="0" />
+                        <polygon class="compass-direction" points="0,-45 -5,-35 5,-35" />
+                      </svg>
+                    </div>
+                    <span class="yawValue" id="yawValue5" yawValue5>-</span>
+                  </div>
+
+                  <div class="saveValuesContainer">
+                    <div class="saveValuesOneContainer" id="saveValuesFiveContainerPlus" saveValuesFiveContainerPlus>
+                      <div>
+                        <h3 class="saveValuesHeader">+90</h3>
+                      </div>
+                      <div>
+                        <input class="fusion-textOne" type="number" name="" id="stepfive_plus90" stepfive_plus90
+                          placeholder="0">
+                      </div>
+                      <div>
+                        <button class="saveValueOneBtn" id="savestepfive_plus90" savestepfive_plus90>Save</button>
+                      </div>
+                    </div>
+
+                    <div class="saveValuesTwoContainer" id="saveValuesFiveContainerMinus" saveValuesFiveContainerMinus>
+                      <div>
+                        <h3 class="saveValuesHeader">-90</h3>
+                      </div>
+                      <div>
+                        <input class="fusion-textOne" type="number" name="" id="stepfive_minus90" stepfive_minus90
+                          placeholder="0">
+                      </div>
+                      <div>
+                        <button class="saveValueTwoBtn" id="savestepfive_minus90" savestepfive_minus90>Save</button>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="stopButtonFusionPageOne" id="stopButtonFusionPageFour" stopButtonFusionPageOne>STOP
+                    CALIBRATION</button>
+                </div>
+              </div>
+
+              <div class="closeFinalFusionPopupContainer">
+                <button class="close-finalFusion-popup" id="close-finalFusion-popup">Exit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- End of Device Config Sensor Fusion Popup Styling -->
+
+
+
+    <!-- MAIN CONTENT - Magnetometer Calibration Container -->
+    <div id="tab5" class="tabcontent">
+
+      <h1 class="mag-header-main">MAGNETOMETER CALIBRATION</h1>
+
+      <div class="deviceCalibrationSettingSection">
+
+
+        <div class="magCalLeft">
+          <!-- Instructional Steps for Magnetometer Page - Styling Adapted from Firmware Updater Page -->
+          <div class="processSection">
+            <h2 style="font-family: var(--header-font);">PROCESS</h2>
+            <div class="processSubHeader" style="word-wrap: break-word;">Once the navXMagCalibrator application has
+              started, you have two options. If you would like to retrieve your old calibrated values, press retrieve values to the right. Otherwise, select the Start Calibration button to begin. Once finished, click save values to store your data.
+            </div>
+            <div class="magInstructionalVideo">
+                <video width="100%" height="50%" controls muted src="./tutorialVideos/magcal.mp4"></video>
+            </div>
+          </div>
+        </div>
+
+        <div class="magCalRight">
+
+          <div class="saveValueBtnContainer" id="saveDiv" saveDiv>
+            <button class="saveValuesBtn" id="saveBtn" saveBtn>Save Calculated Values to Device</button>
+            <button class="retrieveValuesBtn" id="retrieveBtn" retrieveBtn>Retrieve Values from Device</button>
+          </div>
+
+          <div class="matrixCalculationSection" style="margin-top: 5%;">
+
+            <!-- Transformation Matrix Container -->
+            <h4 class="transformation-matrix-header">Transformation Matrix</h4>
+            <div class="matrix-container">
+              <div class="matrix-item" id="M11Div" M11Div>
+                <span class="m11-text" id="matrixAndBiasHeader">M11 =</span>
+                <input class="matrix-text" type="number" name="" id="M11" M11 placeholder="0">
+              </div>
+              <div class="matrix-item" id="M12Div" M12Div>
+                <span class="m12-text" id="matrixAndBiasHeader">M12 =</span>
+                <input class="matrix-text" type="number" name="" id="M12" M12 placeholder="0">
+              </div>
+              <div class="matrix-item" id="M13Div" M13Div>
+                <span class="m13-text" id="matrixAndBiasHeader">M13 =</span>
+                <input class="matrix-text" type="number" name="" id="M13" M13 placeholder="0">
+              </div>
+              <div class="matrix-item" id="M21Div" M21Div>
+                <span class="m21-text" id="matrixAndBiasHeader">M21 =</span>
+                <input class="matrix-text" type="number" name="" id="M21" M21 placeholder="0">
+              </div>
+              <div class="matrix-item" id="M22Div" M22Div>
+                <span class="m22-text" id="matrixAndBiasHeader">M22 =</span>
+                <input class="matrix-text" type="number" name="" id="M22" M22 placeholder="0">
+              </div>
+              <div class="matrix-item" id="M23Div" M23Div>
+                <span class="m23-text" id="matrixAndBiasHeader">M23 =</span>
+                <input class="matrix-text" type="number" name="" id="M23" M23 placeholder="0">
+              </div>
+              <div class="matrix-item" id="M31Div" M31Div>
+                <span class="m31-text" id="matrixAndBiasHeader">M31 =</span>
+                <input class="matrix-text" type="number" name="" id="M31" M31 placeholder="0">
+              </div>
+
+              <div class="matrix-item" id="M32Div" M32Div>
+                <span class="m32-text" id="matrixAndBiasHeader">M32 =</span>
+                <input class="matrix-text" type="number" name="" id="M32" M32 placeholder="0">
+              </div>
+
+              <div class="matrix-item" id="M33Div" M33Div>
+                <span class="m33-text" id="matrixAndBiasHeader">M33 =</span>
+                <input class="matrix-text" type="number" name="" id="M33" M33 placeholder="0">
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Bias Matrix Container -->
+          <div class="matrixCalculationSection">
+            <h4 class="bias-matrix-header">Bias Matrix </h4>
+            <div class="bias-container">
+              <div class="bias-item" id="bias1Div" bias1Div>
+                <span id="matrixAndBiasHeader">Bx =</span>
+                <input class="bias-text" type="number" name="" id="bias1" bias1 placeholder="0">
+              </div>
+              <div class="bias-item" id="bias2Div" bias1Div>
+                <span id="matrixAndBiasHeader">By =</span>
+                <input class="bias-text" type="number" name="" id="bias2" bias2 placeholder="0">
+              </div>
+              <div class="bias-item" id="bias3Div" bias1Div>
+                <span id="matrixAndBiasHeader">Bz =</span>
+                <input class="bias-text" type="number" name="" id="bias3" bias3 placeholder="0">
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calculateMatrixBtnContainer">
+        <button id="calculateMatrixBtn" class="calculateMatrixBtn">START CALIBRATION</button>
+      </div>
+
+
+      <!-- Beginning of first mag popup container -->
+      <div id="mag-popup-container">
+        <div id="mag-popup">
+          <div class="mag-content">
+            <div class="magTotal">
+              <div class="magContainer">
+                <div class="stepsContainer">
+                  <div class="steps">
+                    <div class="step-text">STEP</div>
+                    <div class="step-confi">Configuration Mode</div>
+                  </div>
+                  <div class="step-num">1</div>
+                  <div class="step-te">Axis <span class="steps-te-span">X+</span class="magMainHeader"> Data Point
+                    Calibration
+                  </div>
+                </div>
+
+                <div class="nextAndPrevButtonContainer">
+                  <div class="prevBtn">
+                    <button id="" class="leftButton"> <i class="fa-solid fa-left-long leftIcon"></i> </button>
+                  </div>
+                  <div class="nextBtn" id="nextBtn" nextBtn>
+                    <button id="rightButton" class="rightButton"> <i id="rightIcon"
+                        class="fa-solid fa-right-long rightIcon"></i>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="magVideo">
+                <img width="50%" height="400px" class="vidMag" id="imageLeftMag" controls muted src="./img/magCalImages/X_plus_0.png"></img>
+                <img width="50%" height="400px" class="vidMag" id="imageRightMag" controls muted src="./img/magCalImages/X_plus_180.png"></img>
+              </div>
+
+
+              <!-- Point 0 deg calculation -->
+              <div class="firstSet">
+                <div class="firstSetContainer">
+
+                  <div class="pointSection">
+                    <p class="pointLabel"> Point 0 Deg&nbsp;&nbsp;</p>
+                  </div>
+                  <div class="coordinates">
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">X</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="xplus_0x" xplus_0x>
+                    </div>
+
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Y</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="xplus_0y">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Z</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="xplus_0z">
+                    </div>
+                  </div>
+
+                  <div class="saveAndRecordMagContainer" id="xplus0Div" xplus0Div>
+                    <button class="recordMagValuesBtn" id="xplus0GetBtn" xplus0GetBtn>Get Values</button>
+                    <button class="magSaveValuesBtn" id="xplus0SaveBtn" xplus0SaveBtn>Save Values</button>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- Point 180 deg calculation -->
+
+              <div class="secondSet" id="secondCalculation">
+                <div class="secondSetContainer">
+
+
+
+                  <div class="pointSection">
+                    <p class="pointLabel" id="pointLabel180"> Point 180 Deg</p>
+                  </div>
+                  <div class="coordinates">
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">X</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="xplus_180x">
+                    </div>
+
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Y</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="xplus_180y">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Z</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="xplus_180z">
+                    </div>
+                  </div>
+
+                  <div class="saveAndRecordMagContainer" id="xplus180Div" xplus180Div>
+                    <button class="recordMagValuesBtn" id="xplus180GetBtn" xplus180GetBtn>Get Values</button>
+                    <button class="magSaveValuesBtn" id="xplus180SaveBtn" xplus180SaveBtn>Save Values</button>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="closePopupContainer">
+                <button id="close-mag-popup">Exit</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="mag-popupTwo-container">
+        <div id="mag-popupTwo">
+          <div class="mag-content">
+
+            <div class="magTotal">
+              <div class="magContainer">
+                <div class="stepsContainer">
+                  <div class="steps">
+                    <div class="step-text">STEP</div>
+                    <div class="step-confi">Configuration Mode</div>
+                  </div>
+                  <div class="step-num">2</div>
+                  <div class="step-te">Axis <span class="steps-te-span">X-</span> Data Point Calibration</div>
+                </div>
+
+                <div class="nextAndPrevButtonContainer">
+                  <div class="prevBtn">
+                    <button id="previousPopupButton" class="leftButton"> <i class="fa-solid fa-left-long leftIcon"></i>
+                    </button>
+                  </div>
+                  <div class="nextBtn">
+                    <button id="openThirdPopup" class="rightButton"> <i class="fa-solid fa-right-long rightIcon"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="magVideo">
+                <img width="50%" height="400px" class="vidMag" id="imageLeftMag2" controls muted src="./img/magCalImages/X_minus_0.png"></img>
+                <img width="50%" height="400px" class="vidMag" id="imageRightMag2" controls muted src="./img/magCalImages/X_minus_180.png"></img>            
+              </div>
+
+
+              <div class="firstSet">
+                <div class="firstSetContainer">
+                  <div class="pointSection">
+                    <p class="pointLabel"> Point 0 Deg&nbsp;&nbsp;</p>
+                  </div>
+                  <div class="coordinates">
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">X</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="xminus_0x">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Y</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="xminus_0y">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Z</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="xminus_0z">
+                    </div>
+                  </div>
+
+                  <div class="saveAndRecordMagContainer" id="xminus0Div" xminus0Div>
+                    <button class="recordMagValuesBtn" id="xminus0GetBtn" xminus0GetBtn>Get Values</button>
+                    <button class="magSaveValuesBtn" id="xminus0SaveBtn" xminus0SaveBtn>Save Values</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="secondSet" id="thirdCalculation">
+                <div class="secondSetContainer">
+                  <div class="pointSection">
+                    <p class="pointLabel"> Point 180 Deg</p>
+                  </div>
+                  <div class="coordinates">
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">X</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="xminus_180x">
+                    </div>
+
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Y</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="xminus_180y">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Z</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="xminus_180z">
+                    </div>
+                  </div>
+
+                  <div class="saveAndRecordMagContainer" id="xminus180Div" xminus180Div>
+                    <button class="recordMagValuesBtn" id="xminus180GetBtn" xminus180GetBtn>Get Values</button>
+                    <button class="magSaveValuesBtn" id="xminus180SaveBtn" xminus180SaveBtn>Save Values</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div id="mag-popupThree-container">
+        <div id="mag-popupThree">
+          <div class="mag-content">
+            <div class="magTotal">
+              <div class="magContainer">
+                <div class="stepsContainer">
+                  <div class="steps">
+                    <div class="step-text">STEP</div>
+                    <div class="step-confi">Configuration Mode</div>
+                  </div>
+                  <div class="step-num">3</div>
+                  <div class="step-te">Axis <span class="steps-te-span">Y+</span> Data Point Calibration</div>
+                </div>
+
+                <div class="nextAndPrevButtonContainer">
+                  <div class="prevBtn">
+                    <button id="closeThirdPopup" class="leftButton"> <i class="fa-solid fa-left-long leftIcon"></i>
+                    </button>
+                  </div>
+                  <div class="nextBtn">
+                    <button id="openFourthPopup" class="rightButton"> <i class="fa-solid fa-right-long rightIcon"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="magVideo">
+                <img width="50%" height="400px" class="vidMag" id="imageLeftMag3" controls muted src="./img/magCalImages/Y_plus_0.png"></img>
+                <img width="50%" height="400px" class="vidMag" id="imageRightMag3" controls muted src="./img/magCalImages/Y_plus_180.png"></img>   
+              </div>
+
+              <div class="firstSet">
+                <div class="firstSetContainer">
+                  <div class="pointSection">
+                    <p class="pointLabel"> Point 0 Deg&nbsp;&nbsp;</p>
+                  </div>
+                  <div class="coordinates">
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">X</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="yplus_0x">
+                    </div>
+
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Y</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="yplus_0y">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Z</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="yplus_0z">
+                    </div>
+                  </div>
+                  <div class="saveAndRecordMagContainer" id="yplus0Div" yplus0Div>
+                    <button class="recordMagValuesBtn" id="yplus0GetBtn" yplus0GetBtn>Get Values</button>
+                    <button class="magSaveValuesBtn" id="yplus0SaveBtn" yplus0SaveBtn>Save Values</button>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="secondSet" id="fourthCalculation">
+                <div class="secondSetContainer">
+                  <div class="pointSection">
+                    <p class="pointLabel"> Point 180 Deg</p>
+                  </div>
+                  <div class="coordinates">
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">X</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="yplus_180x">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Y</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="yplus_180y">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Z</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="yplus_180z">
+                    </div>
+                  </div>
+
+                  <div class="saveAndRecordMagContainer" id="yplus180Div" yplus180Div>
+                    <button class="recordMagValuesBtn" id="yplus180GetBtn" yplus180GetBtn>Get Values</button>
+                    <button class="magSaveValuesBtn" id="yplus180SaveBtn" yplus180SaveBtn>Save Values</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="mag-popupFour-container">
+        <div id="mag-popupFour">
+          <div class="mag-content">
+            <div class="magTotal">
+              <div class="magContainer">
+                <div class="stepsContainer">
+                  <div class="steps">
+                    <div class="step-text">STEP</div>
+                    <div class="step-confi">Configuration Mode</div>
+                  </div>
+                  <div class="step-num">4</div>
+                  <div class="step-te">Axis <span class="steps-te-span">Y-</span> Data Point Calibration</div>
+                </div>
+                <div class="nextAndPrevButtonContainer">
+                  <div class="prevBtn">
+                    <button id="closeFourthPopup" class="leftButton"> <i class="fa-solid fa-left-long leftIcon"></i>
+                    </button>
+                  </div>
+                  <div class="nextBtn">
+                    <button id="openFifthPopup" class="rightButton"> <i class="fa-solid fa-right-long rightIcon"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="magVideo">
+                <img width="50%" height="400px" class="vidMag" id="imageLeftMag4" controls muted src="./img/magCalImages/Y_minus_0.png"></img>
+                <img width="50%" height="400px" class="vidMag" id="imageRightMag4" controls muted src="./img/magCalImages/Y_minus_180.png"></img>       
+               </div>
+
+              <div class="firstSet">
+                <div class="firstSetContainer">
+                  <div class="pointSection">
+                    <p class="pointLabel"> Point 0 Deg&nbsp;&nbsp;</p>
+                  </div>
+                  <div class="coordinates">
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">X</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="yminus_0x">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Y</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="yminus_0y">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Z</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="yminus_0z">
+                    </div>
+                  </div>
+                  <div class="saveAndRecordMagContainer" id="yminus0Div" yminus0Div>
+                    <button class="recordMagValuesBtn" id="yminus0GetBtn" yminus0GetBtn>Get Values</button>
+                    <button class="magSaveValuesBtn" id="yminus0SaveBtn" yminus0SaveBtn>Save Values</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="secondSet" id="fifthCalculation">
+                <div class="secondSetContainer">
+                  <div class="pointSection">
+                    <p class="pointLabel"> Point 180 Deg</p>
+                  </div>
+                  <div class="coordinates">
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">X</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="yminus_180x">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Y</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="yminus_180y">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Z</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="yminus_180z">
+                    </div>
+                  </div>
+                  <div class="saveAndRecordMagContainer" id="yminus180Div" yminus180Div>
+                    <button class="recordMagValuesBtn" id="yminus180GetBtn" yminus180GetBtn>Get Values</button>
+                    <button class="magSaveValuesBtn" id="yminus180SaveBtn" yminus180SaveBtn>Save Values</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="mag-popupFive-container">
+        <div id="mag-popupFive">
+          <div class="mag-content">
+            <div class="magTotal">
+              <div class="magContainer">
+                <div class="stepsContainer">
+                  <div class="steps">
+                    <div class="step-text">STEP</div>
+                    <div class="step-confi">Configuration Mode</div>
+                  </div>
+                  <div class="step-num">5</div>
+                  <div class="step-te">Axis <span class="steps-te-span">Z+</span> Data Point Calibration</div>
+                </div>
+                <div class="nextAndPrevButtonContainer">
+                  <div class="prevBtn">
+                    <button id="closeFifthPopup" class="leftButton"> <i class="fa-solid fa-left-long leftIcon"></i>
+                    </button>
+                  </div>
+                  <div class="nextBtn">
+                    <button id="openSixthPopup" class="rightButton"> <i class="fa-solid fa-right-long rightIcon"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="magVideo">
+                <img width="50%" height="400px" class="vidMag" id="imageLeftMag5" controls muted src="./img/magCalImages/Z_plus_0.png"></img>
+                <img width="50%" height="400px" class="vidMag" id="imageRightMag5" controls muted src="./img/magCalImages/Z_plus_180.png"></img>     
+             </div>
+
+              <div class="firstSet">
+                <div class="firstSetContainer">
+                  <div class="pointSection">
+                    <p class="pointLabel"> Point 0 Deg&nbsp;&nbsp;</p>
+                  </div>
+                  <div class="coordinates">
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">X</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="zplus_0x">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Y</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="zplus_0y">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Z</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="zplus_0z">
+                    </div>
+                  </div>
+                  <div class="saveAndRecordMagContainer" id="zplus0Div" zplus0Div>
+                    <button class="recordMagValuesBtn" id="zplus0GetBtn" zplus0GetBtn>Get Values</button>
+                    <button class="magSaveValuesBtn" id="zplus0SaveBtn" zplus0SaveBtn>Save Values</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="secondSet" id="sixthCalculation">
+                <div class="secondSetContainer">
+                  <div class="pointSection">
+                    <p class="pointLabel"> Point 180 Deg</p>
+                  </div>
+                  <div class="coordinates">
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">X</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="zplus_180x">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Y</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="zplus_180y">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Z</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="zplus_180z">
+                    </div>
+                  </div>
+                  <div class="saveAndRecordMagContainer" id="zplus180Div" zplus180Div>
+                    <button class="recordMagValuesBtn" id="zplus180GetBtn" zplus180GetBtn>Get Values</button>
+                    <button class="magSaveValuesBtn" id="zplus180SaveBtn" zplus180SaveBtn>Save Values</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="mag-popupSix-container">
+        <div id="mag-popupSix">
+          <div class="mag-content">
+            <div class="magTotal">
+              <div class="magContainer">
+                <div class="stepsContainer">
+                  <div class="steps">
+                    <div class="step-text">STEP</div>
+                    <div class="step-confi">Configuration Mode</div>
+                  </div>
+                  <div class="step-num">6</div>
+                  <div class="step-te">Axis <span class="steps-te-span">Z-</span> Data Point Calibration</div>
+                </div>
+
+                <div class="nextAndPrevButtonContainer">
+                  <div class="prevBtn">
+                    <button id="closeSixthPopup" class="leftButton"> <i class="fa-solid fa-left-long leftIcon"></i>
+                    </button>
+                  </div>
+                  <div class="nextBtn">
+                    <button id="openSeventhPopup" class="rightButton"> <i class="fa-solid fa-right-long rightIcon"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="magVideo">
+                <img width="50%" height="400px" class="vidMag" id="imageLeftMag6" controls muted src="./img/magCalImages/Z_minus_0.png"></img>
+                <img width="50%" height="400px" class="vidMag" id="imageRightMag6" controls muted src="./img/magCalImages/Z_minus_180.png"></img>            
+              </div>
+
+              <div class="firstSet">
+                <div class="firstSetContainer">
+                  <div class="pointSection">
+                    <p class="pointLabel"> Point 0 Deg&nbsp;&nbsp;</p>
+                  </div>
+                  <div class="coordinates">
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">X</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="zminus_0x">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Y</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="zminus_0y">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Z</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="zminus_0z">
+                    </div>
+                  </div>
+                  <div class="saveAndRecordMagContainer" id="zminus0Div" zminus0Div>
+                    <button class="recordMagValuesBtn" id="zminus0GetBtn" zminus0GetBtn>Get Values</button>
+                    <button class="magSaveValuesBtn" id="zminus0SaveBtn" zminus0SaveBtn>Save Values</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="secondSet" id="seventhCalculation">
+                <div class="secondSetContainer">
+                  <div class="pointSection">
+                    <p class="pointLabel"> Point 180 Deg</p>
+                  </div>
+                  <div class="coordinates">
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">X</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="zminus_180x">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Y</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="zminus_180y">
+                    </div>
+                    <div class="coordItem">
+                      <h3 class="coordSectionText">Z</h3>
+                      <input class="coordText" placeholder="---" type="number" name="inputLabel" id="zminus_180z">
+                    </div>
+                  </div>
+                  <div class="saveAndRecordMagContainer" id="zminus180Div" zminus180Div>
+                    <button class="recordMagValuesBtn" id="zminus180GetBtn" zminus180GetBtn>Get Values</button>
+                    <button class="magSaveValuesBtn" id="zminus180SaveBtn" zminus180SaveBtn>Save Values</button>
+                  </div>
+                </div>
+                <div class="closeFinalPopupContainer" id="calculatematrixDiv" calculatematrixDiv>
+                  <button id="calculateSaveBtn" calculateSaveBtn>Calculate</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- End of Mag Page Popup Styling -->
+
+
+
+
+    <!-- MAIN CONTENT -  Official Documentation Page Container -->
+    <div id="tab6" class="tabcontent">
+      <div id="helpDocumentationPage"> </div>
+      <!-- Script to load the documentation page using the Studica "html" folder -->
+      <script>
+        function load_helpPage() {
+          document.getElementById("helpDocumentationPage").innerHTML = '<object type="text/html" data="html/index.html" ></object>';
+        }
+        window.addEventListener("load", function () {
+          load_helpPage();
+        });
+      </script>
+    </div> <!-- End of Help Documentation Page Styling -->
+
+
+    <!-- MAIN CONTENT -  About Page Container -->
+    <div id="tab7" class="tabcontent">
+
+      <div class="aboutContent">
+        <h2 style="color: var(--dark-grey); font-family: var(--header-font);">ABOUT STUDICA</h2>
+        <hr>
+        <h1>The Studica Story</h1>
+        <p>Studica is an innovative solution supplier of future-focused technologies to the Academic Community and
+          Industry.</p>
+
+        <h2>Who We Are and What We Do</h2>
+        <p>Studica caters to our valued customers in Education and Industry, serving thousands of schools, teachers,
+          students, and businesses. We love what we do! Being in business for over thirty-five years, we have witnessed
+          countless changes in the technology industry, and thrive on introducing new, creative solutions to the
+          classroom
+          and corporate world. We are thrilled to make a difference, with innovations that enhance an individual’s
+          skills,
+          leading to future employment. It is our goal to impact life-long learners of all ages with inspiring
+          technologies.</p>
+        <br>
+        <p>The Studica Robotics (SR) division develops and manufactures Controllers, Sensors, and Kits used in education
+          and competitions around the world. Studica represents key manufacturers with solutions for STEM Education,
+          Robotics, Game Development/Design, Coding, Data Acquisition, Language Learning, and more. We work with
+          Academic
+          Consortiums such as the Southern Regional Education Board (SREB) and UTeachEngineering, providing procurement
+          and kitting Services and technical expertise. Our line card includes Lumion, NI (formerly National
+          Instruments),
+          fischertechnik, YoYo Games, Maxon, Babbel, Language Tree Online, PTC, Chaos V-Ray, MSi, Unity, Avid, and our
+          own
+          Robotics products.</p>
+        <br>
+        <p>As well, Studica is the North American distributor for the fischertechnik line of automation and simulation
+          models, STEM Education project-based learning curriculum programs, classroom bundles, accessories, and spare
+          parts.</p>
+        <br>
+        <p>Studica is also a proud Global Partner and the official exclusive product supplier for the WorldSkills Mobile
+          Robotics Competition for Shanghai 2022 & Lyon 2024. It is an enormous honor for us to partner with a worldwide
+          organization that fosters opportunities and connects societies with skills.</p>
+          
+      
+
+    <!-- Activation and Deactivation of the Tour Functionality -->
+    <button class="toggleTourBtn" id="toggle-tour">Click Here for Tour <i
+      class="fa-regular fa-circle-play"></i></button>
+        <!-- Dark Mode Toggle  -->
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round">
+              <div class="slider-icon">
+                <i class='bx bxs-moon' ></i>
+              </div>
+            </div>
+          </label>
+        </div>
+
+          <div class="keyboard-shortcuts-container">
+            <div class="shortcutsHeader">
+              <h3>Helpful Shortcuts</h3>
+            </div>
+          <div class="keyboard-shortcut-memo">
+            <p class="tour-shortcut">Toggle Tour: <b>Ctrl-Shift-T</b></p>
+            <p class="dark-mode-shortcut">Toggle Night Mode <b>Ctrl-Shift-N</b></p>
+          </div>
+        </div>  
+
+          <div class="copyright-Footer"> 
+             <p class="copyright-text main" >Copyright <i class="fa-regular fa-copyright"></i> 2023 Studica Limited. All rights reserved.</p>
+             <p class="copyright-text">Icons in this application were sourced from: <a class="external-link" style="color: var(--first-color-light);" href="https://fontawesome.com/search?q=play&o=r&m=free">Font Awesome</a>, <a class="external-link" style="color: var(--first-color-light);" href="https://boxicons.com/">Boxicons</a> & 
+              <a class="external-link" style="color: var(--first-color-light);" href="https://www.flaticon.com/free-animated-icons/wait" title="wait animated icons">Wait animated icons created by Freepik - Flaticon</a>
+             <script>
+              // Opens the web links in the browser, without this, the links open inside the app.
+              const { shell } = require('electron');
+              document.addEventListener('click', (event) => {
+                if (event.target.classList.contains('external-link')) {
+                  event.preventDefault();
+                  shell.openExternal(event.target.href);
+                }
+              });
+            </script>
+        </div>
+
+        <div class="developer-note"> 
+        <p class="developer-note-text">Made with <i
+            class="fa-solid fa-heart" style="color: rgb(168, 14, 14);"></i> by Mohit B. and Pranav S.</p>
+      </div>
+
+    </div> <!-- End of About Page Styling -->
+
+  </div> <!-- End of Tabs Container -->
+
+
+
+  <!-- Need this script to make the tour functionality work -->
+  <script src="./node_modules/shepherd.js/dist/js/shepherd.min.js"></script>
+
+  <!-- Need this script to make the toggle tbas - colour change & tab opening and closing functionality to work -->
+  <script>
+    require('./renderer.js');
+
+    /*===== LINK ACTIVE  =====*/
+    const linkColor = document.querySelectorAll('.tablinks')
+
+    function colorLink() {
+      if (linkColor) {
+        linkColor.forEach(l => l.classList.remove('active'))
+        this.classList.add('active')
+      }
+    }
+    linkColor.forEach(l => l.addEventListener('click', colorLink))
+
+    /*===== Toggling Tabs Functionality  =====*/
+    const openTab = (evt, tabName) => {
+      let i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.classList.add("active");
+
+      
+      document.getElementById('accel-popup-container').classList.remove('visible');
+
+      document.getElementById('mag-popupSix-container').classList.remove('visible');
+      document.getElementById('mag-popupFive-container').classList.remove('visible');
+      document.getElementById('mag-popupFour-container').classList.remove('visible');
+      document.getElementById('mag-popupThree-container').classList.remove('visible');
+      document.getElementById('mag-popupTwo-container').classList.remove('visible');
+      document.getElementById('mag-popup-container').classList.remove('visible');
+
+      document.getElementById('fusion-popupFive-container').classList.remove('visible');
+      document.getElementById('fusion-popupFour-container').classList.remove('visible');
+      document.getElementById('fusion-popupThree-container').classList.remove('visible');
+      document.getElementById('fusion-popupTwo-container').classList.remove('visible');
+      document.getElementById('fusion-popup-container').classList.remove('visible');
+
+
+    }
+    // Set the default tab to be opened
+    document.getElementById("deviceDashboard").click();
+  </script>
+
+</body>
+
+</html>
