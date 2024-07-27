@@ -1,5 +1,7 @@
 # Studica App
 
+Demo of the app: https://drive.google.com/file/d/1OBS3okU0siSYTH0IKiy4boLocQ97KGK_/view?usp=drive_link
+
 ## Running the App
 
 Download the repository and run the following commands in the windows terminal to start the application.
